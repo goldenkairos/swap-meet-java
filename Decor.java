@@ -1,0 +1,3 @@
+class Decor extends Item {
+    
+}
