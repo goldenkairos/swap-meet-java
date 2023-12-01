@@ -14,4 +14,12 @@ public abstract class Item {
         this.itemID = id;
     }
 
+    protected int getItemID(Item item){
+        return this.itemID;
+    }
+
+    protected void setItemID(int newID){
+        this.itemID = newID;
+    }
+
 }
