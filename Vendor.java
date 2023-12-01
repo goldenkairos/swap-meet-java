@@ -37,4 +37,16 @@ public class Vendor {
         }
         return null; //when item was not found
     }
+
+    public List<Item> getByCategory(String category){
+        List<Item> output = new ArrayList<Item>() ;
+        
+        for (Item item:this.inventory){
+            if(item.category.equals(category)){
+                output.add(item);
+            }
+        }
+        return output;
+        
+    }
 }
