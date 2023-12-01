@@ -1,7 +1,8 @@
 public class Main {
     public static void main(String[] args){
-        Vendor vendor1 = new Vendor();
-        System.out.println(vendor1.inventory);
+        Vendor vendor1 = new Vendor("Victor");
+        vendor1.setName("Yuki");
+        System.out.println(vendor1.getName());
 
         Decor newHat = new Decor(0);
         System.out.println(newHat.category);
@@ -16,6 +17,7 @@ public class Main {
         System.out.println(vendor1.inventory);
 
         System.out.println(vendor1.getByCategory("Decor"));
+
 
     }
 }

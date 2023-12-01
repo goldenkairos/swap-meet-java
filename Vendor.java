@@ -10,14 +10,24 @@ public class Vendor {
 
     //add and remove method: 
 
+    protected String name;
     public List<Item> inventory;
 
-    public Vendor(){
+    public Vendor(String name){
         this.inventory = new ArrayList<>();
+        this.name = name;
     }
 
-    public Vendor(List<Item> inventory){
+    public Vendor(String name,List<Item> inventory){
         this.inventory = inventory; /// Use "this" to refer to the instance variable
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public Item add(Item item){
