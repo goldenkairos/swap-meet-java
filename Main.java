@@ -13,6 +13,8 @@ public class Main {
         
         vendor1.inventory.add(new Decor(1));
         vendor1.inventory.add(new Decor(2));
+        vendor1.inventory.add(new Electronics(3));
+        vendor1.inventory.add(new Clothing(4));
 
         System.out.println(vendor1.inventory);
 
