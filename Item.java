@@ -22,4 +22,7 @@ public abstract class Item {
         this.itemID = newID;
     }
 
+    protected String getItemCategory(){
+        return this.category;
+    }
 }

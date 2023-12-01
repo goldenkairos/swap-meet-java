@@ -20,6 +20,9 @@ public class Main {
 
         System.out.println(vendor1.getByCategory("Decor"));
 
+        for (Item item : vendor1.inventory){
+            System.out.println(item.getItemCategory());
+        }
 
     }
 }
