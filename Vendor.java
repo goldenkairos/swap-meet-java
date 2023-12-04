@@ -19,11 +19,12 @@ public class Vendor {
     }
 
     public Vendor(String name,List<Item> inventory){
+        this.name = name;
         this.inventory = inventory; /// Use "this" to refer to the instance variable
     }
 
-    public String getName(){
-        return this.name;
+    public String toString(){
+        return name;
     }
 
     public void setName(String name){
@@ -35,6 +36,7 @@ public class Vendor {
         return item;
     }
 
+    //update to pass int itemID to remove item
     public Item remove(Item item){
         Iterator<Item> iterator = this.inventory.iterator();
 
@@ -42,10 +44,10 @@ public class Vendor {
             Item unit = iterator.next();
             if (unit.equals(item)){
                 iterator.remove();
-                return item;
+                return item; //update to String "Item has been removed from vendor {name}'s' inventory list"
             }
         }
-        return null; //when item was not found
+        return null; //when item was not found //update to String "Item is not found in vendor {name}'s inventory list"
     }
 
     public List<Item> getByCategory(String category){

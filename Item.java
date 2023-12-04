@@ -4,7 +4,7 @@ public abstract class Item {
     //abstract int property itemID
 
     //Constructor should have category and itemID
-
+    //TO DO in Item, we will create a unique itemID and pass it to the subclass as we create an instance
     
     protected int itemID;
     protected String category = "";
@@ -25,4 +25,5 @@ public abstract class Item {
     protected String getItemCategory(){
         return this.category;
     }
+    //look into toString insteaed of getItemCategory
 }

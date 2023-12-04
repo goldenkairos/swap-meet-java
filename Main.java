@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args){
         Vendor vendor1 = new Vendor("Victor");
+        System.out.println(vendor1.toString());
         vendor1.setName("Yuki");
         System.out.println(vendor1.getName());
 
