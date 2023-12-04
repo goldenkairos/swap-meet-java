@@ -14,6 +14,11 @@ public abstract class Item {
         this.itemID = id;
     }
 
+    @Override
+    public String toString(){
+        return this.category+".itemID" + this.itemID;
+    }
+
     protected int getItemID(Item item){
         return this.itemID;
     }
@@ -22,8 +27,4 @@ public abstract class Item {
         this.itemID = newID;
     }
 
-    protected String getItemCategory(){
-        return this.category;
-    }
-    //look into toString insteaed of getItemCategory
 }

@@ -37,17 +37,35 @@ public class Vendor {
     }
 
     //update to pass int itemID to remove item
-    public Item remove(Item item){
+    public boolean remove(Item item){
+        // Iterator<Item> iterator = this.inventory.iterator();
+
+        // while (iterator.hasNext()){
+        //     Item unit = iterator.next();
+        //     if (unit.equals(item)){
+        //         iterator.remove();
+        //         return item; //update to String "Item has been removed from vendor {name}'s' inventory list"
+        //     }
+        // }
+        // return null; //when item was not found //update to String "Item is not found in vendor {name}'s inventory list"
+
+        if (checkAvailability(item)){
+            this.inventory.remove(item);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkAvailability(Item item){
         Iterator<Item> iterator = this.inventory.iterator();
 
         while (iterator.hasNext()){
             Item unit = iterator.next();
             if (unit.equals(item)){
-                iterator.remove();
-                return item; //update to String "Item has been removed from vendor {name}'s' inventory list"
-            }
+                return true;
+            } 
         }
-        return null; //when item was not found //update to String "Item is not found in vendor {name}'s inventory list"
+        return false;
     }
 
     public List<Item> getByCategory(String category){
@@ -60,5 +78,17 @@ public class Vendor {
         }
         return output;
         
+    }
+
+    public String swap_items(Item myItem, Vendor friend){
+        String output;
+        if (this.checkAvailability(myItem)){
+            this.remove(myItem);
+            friend.add(myItem);
+            output = "Item has been successfully swapped!";
+        } else {
+            output ="Vendor "+this.toString()+"'s inventory does not contain "+myItem.toString();
+        }
+        return output;
     }
 }

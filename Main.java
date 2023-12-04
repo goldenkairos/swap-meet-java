@@ -3,7 +3,6 @@ public class Main {
         Vendor vendor1 = new Vendor("Victor");
         System.out.println(vendor1.toString());
         vendor1.setName("Yuki");
-        System.out.println(vendor1.getName());
 
         Decor newHat = new Decor(0);
         System.out.println(newHat.category);
@@ -17,13 +16,26 @@ public class Main {
         vendor1.inventory.add(new Electronics(3));
         vendor1.inventory.add(new Clothing(4));
 
-        System.out.println(vendor1.inventory);
+        System.out.println(vendor1.toString()+"'s inventory list before swaping: "+vendor1.inventory);
 
-        System.out.println(vendor1.getByCategory("Decor"));
+        Vendor vendor2 = new Vendor("Yoda");
 
-        for (Item item : vendor1.inventory){
-            System.out.println(item.getItemCategory());
-        }
+        //Swapping newHat
+        System.out.println("Item to be swapped: "+newHat.toString());
 
+        System.out.println(vendor1.swap_items(newHat, vendor2));
+        System.out.println(vendor1.toString()+"'s inventory list: "+vendor1.inventory);
+        System.out.println(vendor2.toString()+"'s inventory list: "+vendor2.inventory);
+
+        //Swap item again, should return false
+        System.out.println(vendor1.swap_items(newHat, vendor2));
+
+        //Adding new item to vendor2
+        Electronics newitem = new Electronics(5);
+        vendor2.add(newitem);
+        //Swap new item from vendor 2 to vendor 1
+        System.out.println(vendor2.swap_items(newitem, vendor1));
+        System.out.println(vendor1.toString()+"'s inventory list: "+vendor1.inventory);
+        System.out.println(vendor2.toString()+"'s inventory list: "+vendor2.inventory);
     }
 }
