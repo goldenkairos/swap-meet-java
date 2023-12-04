@@ -37,5 +37,12 @@ public class Main {
         System.out.println(vendor2.swap_items(newitem, vendor1));
         System.out.println(vendor1.toString()+"'s inventory list: "+vendor1.inventory);
         System.out.println(vendor2.toString()+"'s inventory list: "+vendor2.inventory);
+
+        //Swapping first item
+        System.out.println(vendor1.swap_first_item(vendor2));
+        System.out.println(vendor1.toString()+"'s inventory list after first item swap: "+vendor1.inventory);
+        System.out.println(vendor2.toString()+"'s inventory list after first item swap: "+vendor2.inventory);
+
+
     }
 }

@@ -81,14 +81,31 @@ public class Vendor {
     }
 
     public String swap_items(Item myItem, Vendor friend){
-        String output;
+        String confirmation;
         if (this.checkAvailability(myItem)){
             this.remove(myItem);
             friend.add(myItem);
-            output = "Item has been successfully swapped!";
+            confirmation = "Item has been successfully swapped!";
         } else {
-            output ="Vendor "+this.toString()+"'s inventory does not contain "+myItem.toString();
+            confirmation ="Vendor "+this.toString()+"'s inventory does not contain "+myItem.toString();
         }
-        return output;
+        return confirmation;
+    }
+
+    public String swap_first_item(Vendor friend){
+        String confirmation;
+
+        if (!this.inventory.isEmpty()){
+
+        var firstItem = this.inventory.get(0);
+
+            this.remove(firstItem);
+            friend.add(firstItem);
+        confirmation = "First item has been successfully swapped!";
+        } else {
+            confirmation ="Vendor "+this.toString()+"'s inventory list is empty. Nothing has been swapped! ";
+        }
+        return confirmation;
+
     }
 }
