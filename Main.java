@@ -20,6 +20,11 @@ public class Main {
 
         Vendor vendor2 = new Vendor("Yoda");
 
+        //Swapping first item unsuccessfully
+        System.out.println(vendor2.swap_first_item(vendor1));
+        System.out.println(vendor1.toString()+"'s inventory list after first item swap: "+vendor1.inventory);
+        System.out.println(vendor2.toString()+"'s inventory list after first item swap: "+vendor2.inventory);
+
         //Swapping newHat
         System.out.println("Item to be swapped: "+newHat.toString());
 
