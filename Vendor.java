@@ -40,18 +40,6 @@ public class Vendor {
 
     // update to pass int itemID to remove item
     public boolean remove(Item item) {
-        // Iterator<Item> iterator = this.inventory.iterator();
-
-        // while (iterator.hasNext()){
-        // Item unit = iterator.next();
-        // if (unit.equals(item)){
-        // iterator.remove();
-        // return item; //update to String "Item has been removed from vendor {name}'s'
-        // inventory list"
-        // }
-        // }
-        // return null; //when item was not found //update to String "Item is not found
-        // in vendor {name}'s inventory list"
 
         if (checkAvailability(item)) {
             this.inventory.remove(item);
