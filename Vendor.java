@@ -84,30 +84,33 @@ public class Vendor {
 
     }
 
-    public String swap_items(Item myItem, Vendor friend) {
+    public String swapItems(Vendor friend, Item myItem, Item theirItem) {
         String confirmation;
-        if (this.checkAvailability(myItem)) {
+        if (this.checkAvailability(myItem) && friend.checkAvailability(theirItem)) {
             this.remove(myItem);
             friend.add(myItem);
-            confirmation = "Item has been successfully swapped!";
+            this.add(theirItem);
+            friend.remove(theirItem);
+            
+            confirmation = "Items have been successfully swapped!";
         } else {
-            confirmation = "Vendor " + this.toString() + "'s inventory does not contain " + myItem.toString();
+            confirmation = "One of the vendors' inventory does not contain item";
         }
         return confirmation;
     }
 
-    public String swap_first_item(Vendor friend) {
+    public String swapFirstItem(Vendor friend) {
         String confirmation;
 
-        if (!this.inventory.isEmpty()) {
+        if (!this.inventory.isEmpty() && !friend.inventory.isEmpty()) {
 
-            var firstItem = this.inventory.get(0);
+            var myFirstItem = this.inventory.get(0);
+            var theirFirstItem = friend.inventory.get(0);
 
-            this.remove(firstItem);
-            friend.add(firstItem);
+            swapItems(friend, myFirstItem, theirFirstItem);
             confirmation = "First item has been successfully swapped!";
         } else {
-            confirmation = "Vendor " + this.toString() + "'s inventory list is empty. Nothing has been swapped! ";
+            confirmation = "One of the vendor's inventory list is empty. Nothing has been swapped!";
         }
         return confirmation;
 

@@ -55,13 +55,16 @@ public class VendorTest {
         Viktor.add(itemD);
         Viktor.add(itemE);
 
-        //swaping invalid item
-        Ellie.swap_items(itemA,Viktor);
-        Assert.assertEquals(2,Ellie.inventory.size());
-        Assert.assertEquals(3,Viktor.inventory.size());
+        //swaping valid item
+        Ellie.swapItems(Viktor,itemA,itemD);
+        Assert.assertEquals(3,Ellie.inventory.size());
+        Assert.assertEquals(2,Viktor.inventory.size());
+        Assert.assertTrue(Viktor.checkAvailability(itemA));
+        Assert.assertFalse(Ellie.checkAvailability(itemA));
 
-        String result = Viktor.swap_items(itemB, Ellie);
-        Assert.assertEquals("Vendor Viktor's inventory does not contain Clothing.itemID2",result);
+        //swaping invalid item
+        String result = Viktor.swapItems(Ellie,itemB,itemC);
+        Assert.assertEquals("One of the vendors' inventory does not contain item",result);
     }
 
     
