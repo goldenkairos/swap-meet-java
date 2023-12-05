@@ -8,15 +8,15 @@ public abstract class Item {
     
     protected int itemID;
     protected String category = "";
-    protected int condition;
+    protected double condition;
 
     public Item(String category, int id){
         this.category = category;
         this.itemID = id;
-        this.condition = 0;
+        this.condition = 0.0;
     }
 
-    public Item(String category, int id, int condition){
+    public Item(String category, int id, double condition){
         this.category = category;
         this.itemID = id;
         this.condition = condition;
@@ -27,7 +27,7 @@ public abstract class Item {
         return this.category+".itemID" + this.itemID;
     }
 
-    protected int getItemID(Item item){
+    protected int getItemID(){
         return this.itemID;
     }
 
@@ -35,12 +35,29 @@ public abstract class Item {
         this.itemID = newID;
     }
 
-    protected int getCondition(Item item){
-        return this.condition;
+    protected double getCondition(){
+        return this.condition; //or item.condition?
     }
 
-    protected void setCondition(Item item, int condition){
+    protected void setCondition(double condition){
         this.condition = condition;
     }
 
+    protected String conditionDescription(){
+        String description = "";
+        if (this.condition == 0){
+            description ="Vintage, but not in a good way. Collecting dust and memories.";
+        } else if (this.condition <= 1){
+            description ="Gently pre-loved, like a well-worn teddy bears.";
+        } else if (this.condition <= 2){
+            description ="Showing signs of a life well-lived and some battle scars.";
+        } else if (this.condition <= 3){
+            description ="In its prime, like a fine cheese but without the aroma.";
+        } else if (this.condition <= 4){
+            description ="Almost new, just a few minor scratches—character building, right?.";
+        } else if (this.condition <= 5){
+            description ="Mint condition. It's practically a museum piece.";
+        }
+        return description;
+    }
 }

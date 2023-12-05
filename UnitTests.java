@@ -126,7 +126,26 @@ public class UnitTests {
         Assert.assertEquals("One of the vendor's inventory list is empty. Nothing has been swapped!", confirmation);
         Assert.assertEquals(Kay.inventory.size(),0); // 
         Assert.assertTrue(Sid.checkAvailability(SidFirstItem));
+    }
 
+    @Test
+    public void testItemGetSetCondition(){
+        Decor itemA = new Decor(1);
+        Assert.assertEquals(0.0,itemA.getCondition(),0.001);
+        itemA.setCondition(.5);
+        Assert.assertEquals("Gently pre-loved, like a well-worn teddy bears.",itemA.conditionDescription());
+
+
+        Clothing itemB = new Clothing(2,3.5);
+        Assert.assertEquals(3.5,itemB.getCondition(),0.001);
+        itemB.setCondition(5);
+        Assert.assertEquals("Mint condition. It's practically a museum piece.",itemB.conditionDescription());
+
+        Electronics itemC = new Electronics(3);
+        itemC.setCondition(1.5);
+        String description = itemC.conditionDescription();
+        Assert.assertEquals("Showing signs of a life well-lived and some battle scars.",description);
+        
     }
 
 }
