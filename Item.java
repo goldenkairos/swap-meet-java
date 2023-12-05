@@ -13,6 +13,7 @@ public abstract class Item {
     public Item(String category, int id){
         this.category = category;
         this.itemID = id;
+        this.condition = 0;
     }
 
     public Item(String category, int id, int condition){
@@ -32,6 +33,14 @@ public abstract class Item {
 
     protected void setItemID(int newID){
         this.itemID = newID;
+    }
+
+    protected int getCondition(Item item){
+        return this.condition;
+    }
+
+    protected void setCondition(Item item, int condition){
+        this.condition = condition;
     }
 
 }
