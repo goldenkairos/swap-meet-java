@@ -8,10 +8,17 @@ public abstract class Item {
     
     protected int itemID;
     protected String category = "";
+    protected int condition;
 
     public Item(String category, int id){
         this.category = category;
         this.itemID = id;
+    }
+
+    public Item(String category, int id, int condition){
+        this.category = category;
+        this.itemID = id;
+        this.condition = condition;
     }
 
     @Override
