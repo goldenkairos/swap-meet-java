@@ -63,8 +63,12 @@ public class VendorTest {
         Assert.assertFalse(Ellie.checkAvailability(itemA));
 
         //swaping invalid item
-        String result = Viktor.swapItems(Ellie,itemB,itemC);
+        Assert.assertFalse(Viktor.checkAvailability(itemB)); //Viktor does not have itemB
+        String result = Viktor.swapItems(Ellie,itemB,itemC); //swapping invalid item from Viktor's list
         Assert.assertEquals("One of the vendors' inventory does not contain item",result);
+        Assert.assertFalse(Viktor.checkAvailability(itemB)); //remains as False 
+        Assert.assertTrue(Ellie.checkAvailability(itemC)); //itemC reains in Ellie's inventory
+        
     }
 
     
