@@ -1,5 +1,7 @@
 import org.junit.*;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 
 public class UnitTests {
 
@@ -177,6 +179,34 @@ public class UnitTests {
         Vendor emptyVendor = new Vendor("EmptyVendor");
         Item emptyVendorBestItem = emptyVendor.getBestByCategory("Clothing");
         Assert.assertNull(emptyVendorBestItem);
+    }
+
+    @Test
+    public void swapBestByCategory(){
+        Decor itemA = new Decor(1,3);
+        Clothing itemB = new Clothing(2,3.5);
+        Electronics itemC = new Electronics(4,5);
+        Electronics itemD = new Electronics(5,2.5);
+        Electronics itemE = new Electronics(6,3.5);
+        Decor itemG = new Decor(7,4.5);
+        Clothing itemF = new Clothing(3,3.5);
+
+        List<Item> barbieItems = new ArrayList<>(Arrays.asList(itemA,itemB,itemC,itemD,itemE)); 
+        Vendor Barbie = new Vendor("Barbie",barbieItems);       
+         List<Item> kenItems = new ArrayList<>(Arrays.asList(itemA,itemF,itemG));
+        Vendor Ken = new Vendor("Ken", kenItems);
+
+        Item barbieBestElectronicItems = Barbie.getBestByCategory("Electronics");
+        Item kenBestDecorItems = Ken.getBestByCategory("Decor");
+
+        Boolean result = Barbie.swapBestByCategory(Ken, "Electronics", "Decor");
+
+        Assert.assertEquals(result,true);
+        Assert.assertTrue(Barbie.checkAvailability(kenBestDecorItems));
+        Assert.assertTrue(Ken.checkAvailability(barbieBestElectronicItems));
+        Assert.assertFalse(Barbie.checkAvailability(barbieBestElectronicItems));
+        Assert.assertFalse(Ken.checkAvailability(kenBestDecorItems));
+        
     }
 
 }
