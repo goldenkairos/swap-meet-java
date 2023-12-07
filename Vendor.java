@@ -110,6 +110,10 @@ public class Vendor {
 
         var listByCategory = getByCategory(category);
 
+        if (listByCategory.size()==1){
+            return listByCategory.get(0);
+        }
+        
         for (Item item : listByCategory){
             if (item.category.equals(category) && item.condition > bestCondition){
                 bestCondition = item.condition;

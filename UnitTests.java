@@ -153,14 +153,30 @@ public class UnitTests {
     public void testgetBestByCategory(){
         Decor itemA = new Decor(1);
         Clothing itemB = new Clothing(2,3.5);
-        Electronics itemC = new Electronics(3,5);
-        Electronics itemD = new Electronics(4,2.5);
-        Electronics itemE = new Electronics(5,3.5);
+        Clothing itemF = new Clothing(3,3.5);
+        Electronics itemC = new Electronics(4,5);
+        Electronics itemD = new Electronics(5,2.5);
+        Electronics itemE = new Electronics(6,3.5);
 
+        //unique item with the best condition
         Vendor Barbie = new Vendor("Barbie",Arrays.asList(itemA,itemB,itemC,itemD,itemE));
-        Item bestItem = Barbie.getBestByCategory("Electronics");
+        Item barbieBestItem = Barbie.getBestByCategory("Electronics");
+        Assert.assertEquals(barbieBestItem,itemC);
 
-        Assert.assertEquals(bestItem,itemC);
+        //vendor with one item
+        Vendor Ken = new Vendor("Ken",Arrays.asList(itemA));
+        Item kenBestItem = Ken.getBestByCategory("Decor");
+        Assert.assertEquals(kenBestItem,itemA);
+
+        //vendor with duplicated best item
+        Vendor Skipper = new Vendor("Skipper",Arrays.asList(itemB,itemC,itemF));
+        Item skipperBestItem = Skipper.getBestByCategory("Clothing");
+        Assert.assertTrue(skipperBestItem == itemB || skipperBestItem== itemF);
+
+        //vendor with no item
+        Vendor emptyVendor = new Vendor("EmptyVendor");
+        Item emptyVendorBestItem = emptyVendor.getBestByCategory("Clothing");
+        Assert.assertNull(emptyVendorBestItem);
     }
 
 }
