@@ -113,7 +113,7 @@ public class Vendor {
         if (listByCategory.size()==1){
             return listByCategory.get(0);
         }
-        
+
         for (Item item : listByCategory){
             if (item.category.equals(category) && item.condition > bestCondition){
                 bestCondition = item.condition;
@@ -121,5 +121,17 @@ public class Vendor {
             }
         }
         return bestConditionItem;
+    }
+
+    public boolean swapBestByCategory(Vendor friend, String theirPriority, String myPriority){
+        Item friendItem = friend.getBestByCategory(myPriority);
+        Item myItem = this.getBestByCategory(theirPriority);
+
+        if (myItem !=null && friendItem!=null){
+            this.swapItems(friend, myItem, friendItem);
+            return true;
+        }
+
+        return false;
     }
 }
