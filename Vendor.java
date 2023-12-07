@@ -103,4 +103,19 @@ public class Vendor {
         return confirmation;
 
     }
+
+    public Item getBestByCategory(String category) {
+        Item bestConditionItem = null;
+        double bestCondition = 0.0;
+
+        var listByCategory = getByCategory(category);
+
+        for (Item item : listByCategory){
+            if (item.category.equals(category) && item.condition > bestCondition){
+                bestCondition = item.condition;
+                bestConditionItem = item;
+            }
+        }
+        return bestConditionItem;
+    }
 }

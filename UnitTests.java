@@ -1,4 +1,5 @@
 import org.junit.*;
+import java.util.Arrays;
 
 public class UnitTests {
 
@@ -145,7 +146,21 @@ public class UnitTests {
         itemC.setCondition(1.5);
         String description = itemC.conditionDescription();
         Assert.assertEquals("Showing signs of a life well-lived and some battle scars.",description);
-        
+
+    }
+
+    @Test
+    public void testgetBestByCategory(){
+        Decor itemA = new Decor(1);
+        Clothing itemB = new Clothing(2,3.5);
+        Electronics itemC = new Electronics(3,5);
+        Electronics itemD = new Electronics(4,2.5);
+        Electronics itemE = new Electronics(5,3.5);
+
+        Vendor Barbie = new Vendor("Barbie",Arrays.asList(itemA,itemB,itemC,itemD,itemE));
+        Item bestItem = Barbie.getBestByCategory("Electronics");
+
+        Assert.assertEquals(bestItem,itemC);
     }
 
 }
