@@ -79,7 +79,7 @@ public class Vendor {
             friend.add(myItem);
             this.add(theirItem);
             friend.remove(theirItem);
-            
+
             confirmation = "Items have been successfully swapped!";
         } else {
             confirmation = "One of the vendors' inventory does not contain item";
@@ -110,12 +110,12 @@ public class Vendor {
 
         var listByCategory = getByCategory(category);
 
-        if (listByCategory.size()==1){
+        if (listByCategory.size() == 1) {
             return listByCategory.get(0);
         }
 
-        for (Item item : listByCategory){
-            if (item.category.equals(category) && item.condition > bestCondition){
+        for (Item item : listByCategory) {
+            if (item.category.equals(category) && item.condition > bestCondition) {
                 bestCondition = item.condition;
                 bestConditionItem = item;
             }
@@ -123,16 +123,16 @@ public class Vendor {
         return bestConditionItem;
     }
 
-    public boolean swapBestByCategory(Vendor friend, String theirPriority, String myPriority){
+    public boolean swapBestByCategory(Vendor friend, String theirPriority, String myPriority) {
         Item friendItem = friend.getBestByCategory(myPriority);
         Item myItem = this.getBestByCategory(theirPriority);
 
-        if (myItem !=null && friendItem!=null){
+        if (myItem != null && friendItem != null) {
             this.swapItems(friend, myItem, friendItem);
             return true;
         }
 
         return false;
     }
-    
+
 }

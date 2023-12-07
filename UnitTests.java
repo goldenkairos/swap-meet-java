@@ -121,79 +121,78 @@ public class UnitTests {
         // var KayFirstItem = Kay.inventory.get(0);
         var SidFirstItem = Sid.inventory.get(0);
 
-        Assert.assertEquals(Kay.inventory.size(),0); // validate invalid item
+        Assert.assertEquals(Kay.inventory.size(), 0); // validate invalid item
         Assert.assertTrue(Sid.checkAvailability(SidFirstItem)); // validate valid item
 
         String confirmation = Sid.swapFirstItem(Kay);
 
         Assert.assertEquals("One of the vendor's inventory list is empty. Nothing has been swapped!", confirmation);
-        Assert.assertEquals(Kay.inventory.size(),0); // 
+        Assert.assertEquals(Kay.inventory.size(), 0); //
         Assert.assertTrue(Sid.checkAvailability(SidFirstItem));
     }
 
     @Test
-    public void testItemGetSetCondition(){
+    public void testItemGetSetCondition() {
         Decor itemA = new Decor(1);
-        Assert.assertEquals(0.0,itemA.getCondition(),0.001);
+        Assert.assertEquals(0.0, itemA.getCondition(), 0.001);
         itemA.setCondition(.5);
-        Assert.assertEquals("Gently pre-loved, like a well-worn teddy bears.",itemA.conditionDescription());
+        Assert.assertEquals("Gently pre-loved, like a well-worn teddy bears.", itemA.conditionDescription());
 
-
-        Clothing itemB = new Clothing(2,3.5);
-        Assert.assertEquals(3.5,itemB.getCondition(),0.001);
+        Clothing itemB = new Clothing(2, 3.5);
+        Assert.assertEquals(3.5, itemB.getCondition(), 0.001);
         itemB.setCondition(5);
-        Assert.assertEquals("Mint condition. It's practically a museum piece.",itemB.conditionDescription());
+        Assert.assertEquals("Mint condition. It's practically a museum piece.", itemB.conditionDescription());
 
         Electronics itemC = new Electronics(3);
         itemC.setCondition(1.5);
         String description = itemC.conditionDescription();
-        Assert.assertEquals("Showing signs of a life well-lived and some battle scars.",description);
+        Assert.assertEquals("Showing signs of a life well-lived and some battle scars.", description);
 
     }
 
     @Test
-    public void testgetBestByCategory(){
+    public void testgetBestByCategory() {
         Decor itemA = new Decor(1);
-        Clothing itemB = new Clothing(2,3.5);
-        Clothing itemF = new Clothing(3,3.5);
-        Electronics itemC = new Electronics(4,5);
-        Electronics itemD = new Electronics(5,2.5);
-        Electronics itemE = new Electronics(6,3.5);
+        Clothing itemB = new Clothing(2, 3.5);
+        Clothing itemF = new Clothing(3, 3.5);
+        Electronics itemC = new Electronics(4, 5);
+        Electronics itemD = new Electronics(5, 2.5);
+        Electronics itemE = new Electronics(6, 3.5);
 
-        //unique item with the best condition
-        Vendor Barbie = new Vendor("Barbie",Arrays.asList(itemA,itemB,itemC,itemD,itemE));
+        // unique item with the best condition
+        Vendor Barbie = new Vendor("Barbie", Arrays.asList(itemA, itemB, itemC, itemD, itemE));
         Item barbieBestItem = Barbie.getBestByCategory("Electronics");
-        Assert.assertEquals(barbieBestItem,itemC);
+        Assert.assertEquals(barbieBestItem, itemC);
 
-        //vendor with one item
-        Vendor Ken = new Vendor("Ken",Arrays.asList(itemA));
+        // vendor with one item
+        Vendor Ken = new Vendor("Ken", Arrays.asList(itemA));
         Item kenBestItem = Ken.getBestByCategory("Decor");
-        Assert.assertEquals(kenBestItem,itemA);
+        Assert.assertEquals(kenBestItem, itemA);
 
-        //vendor with duplicated best item
-        Vendor Skipper = new Vendor("Skipper",Arrays.asList(itemB,itemC,itemF));
+        // vendor with duplicated best item
+        Vendor Skipper = new Vendor("Skipper", Arrays.asList(itemB, itemC, itemF));
         Item skipperBestItem = Skipper.getBestByCategory("Clothing");
-        Assert.assertTrue(skipperBestItem == itemB || skipperBestItem== itemF);
+        Assert.assertTrue(skipperBestItem == itemB || skipperBestItem == itemF);
 
-        //vendor with no item
+        // vendor with no item
         Vendor emptyVendor = new Vendor("EmptyVendor");
         Item emptyVendorBestItem = emptyVendor.getBestByCategory("Clothing");
         Assert.assertNull(emptyVendorBestItem);
     }
 
     @Test
-    public void swapBestByCategoryTrue(){
-        Decor itemA = new Decor(1,3);
-        Clothing itemB = new Clothing(2,3.5);
-        Electronics itemC = new Electronics(4,5);
-        Electronics itemD = new Electronics(5,2.5);
-        Electronics itemE = new Electronics(6,3.5);
-        Decor itemG = new Decor(7,4.5);
-        Clothing itemF = new Clothing(3,3.5);
+    public void swapBestByCategoryTrue() {
+        Decor itemA = new Decor(1, 3);
+        Clothing itemB = new Clothing(2, 3.5);
+        Electronics itemC = new Electronics(4, 5);
+        Electronics itemD = new Electronics(5, 2.5);
+        Electronics itemE = new Electronics(6, 3.5);
+        Decor itemG = new Decor(7, 4.5);
+        Clothing itemF = new Clothing(3, 3.5);
 
-        List<Item> barbieItems = new ArrayList<>(Arrays.asList(itemA,itemB,itemC,itemD,itemE)); 
-        Vendor Barbie = new Vendor("Barbie",barbieItems);       
-         List<Item> kenItems = new ArrayList<>(Arrays.asList(itemA,itemF,itemG));
+        List<Item> barbieItems = new ArrayList<>(Arrays.asList(itemA, itemB, itemC, itemD, itemE));
+        Vendor Barbie = new Vendor("Barbie", barbieItems);
+        List<Item> kenItems = new ArrayList<>(Arrays.asList(itemA, itemF, itemG));
         Vendor Ken = new Vendor("Ken", kenItems);
 
         Item barbieBestElectronicItems = Barbie.getBestByCategory("Electronics");
@@ -201,28 +200,28 @@ public class UnitTests {
 
         Boolean result = Barbie.swapBestByCategory(Ken, "Electronics", "Decor");
 
-        Assert.assertEquals(result,true);
+        Assert.assertEquals(result, true);
         Assert.assertTrue(Barbie.checkAvailability(kenBestDecorItems));
         Assert.assertTrue(Ken.checkAvailability(barbieBestElectronicItems));
         Assert.assertFalse(Barbie.checkAvailability(barbieBestElectronicItems));
         Assert.assertFalse(Ken.checkAvailability(kenBestDecorItems));
-        
+
     }
 
     @Test
-    public void swapBestByCategoryFalse(){
-        Decor itemA = new Decor(1,3);
-        Clothing itemB = new Clothing(2,3.5);
-        Electronics itemC = new Electronics(4,5);
-        Electronics itemD = new Electronics(5,2.5);
-        Electronics itemE = new Electronics(6,3.5);
-        Decor itemG = new Decor(7,4.5);
-        Clothing itemF = new Clothing(3,3.5);
+    public void swapBestByCategoryFalse() {
+        Decor itemA = new Decor(1, 3);
+        Clothing itemB = new Clothing(2, 3.5);
+        Electronics itemC = new Electronics(4, 5);
+        Electronics itemD = new Electronics(5, 2.5);
+        Electronics itemE = new Electronics(6, 3.5);
+        Decor itemG = new Decor(7, 4.5);
+        Clothing itemF = new Clothing(3, 3.5);
 
-        //swapping invalid item
-        List<Item> barbieItems = new ArrayList<>(Arrays.asList(itemB,itemC,itemD,itemE)); 
-        Vendor Barbie = new Vendor("Barbie",barbieItems);       
-         List<Item> kenItems = new ArrayList<>(Arrays.asList(itemA,itemF,itemG));
+        // swapping invalid item
+        List<Item> barbieItems = new ArrayList<>(Arrays.asList(itemB, itemC, itemD, itemE));
+        Vendor Barbie = new Vendor("Barbie", barbieItems);
+        List<Item> kenItems = new ArrayList<>(Arrays.asList(itemA, itemF, itemG));
         Vendor Ken = new Vendor("Ken", kenItems);
 
         Item barbieBestDecorItems = Barbie.getBestByCategory("Decor");
@@ -232,13 +231,12 @@ public class UnitTests {
 
         Boolean result = Barbie.swapBestByCategory(Ken, "Decor", "Clothing");
 
-        Assert.assertEquals(result,false);
-        
-        //empty vendor
+        Assert.assertEquals(result, false);
+
+        // vendor with no inventory
         Vendor Stacie = new Vendor("Stacie");
         Boolean falseResult = Stacie.swapBestByCategory(Ken, "Decor", "Clothing");
-        Assert.assertEquals(falseResult,false);
+        Assert.assertEquals(falseResult, false);
     }
 
-}       
-
+}
