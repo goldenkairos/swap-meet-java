@@ -182,7 +182,7 @@ public class UnitTests {
     }
 
     @Test
-    public void swapBestByCategory(){
+    public void swapBestByCategoryTrue(){
         Decor itemA = new Decor(1,3);
         Clothing itemB = new Clothing(2,3.5);
         Electronics itemC = new Electronics(4,5);
@@ -209,4 +209,36 @@ public class UnitTests {
         
     }
 
-}
+    @Test
+    public void swapBestByCategoryFalse(){
+        Decor itemA = new Decor(1,3);
+        Clothing itemB = new Clothing(2,3.5);
+        Electronics itemC = new Electronics(4,5);
+        Electronics itemD = new Electronics(5,2.5);
+        Electronics itemE = new Electronics(6,3.5);
+        Decor itemG = new Decor(7,4.5);
+        Clothing itemF = new Clothing(3,3.5);
+
+        //swapping invalid item
+        List<Item> barbieItems = new ArrayList<>(Arrays.asList(itemB,itemC,itemD,itemE)); 
+        Vendor Barbie = new Vendor("Barbie",barbieItems);       
+         List<Item> kenItems = new ArrayList<>(Arrays.asList(itemA,itemF,itemG));
+        Vendor Ken = new Vendor("Ken", kenItems);
+
+        Item barbieBestDecorItems = Barbie.getBestByCategory("Decor");
+        Item kenBestClothingItems = Ken.getBestByCategory("Clothing");
+        Assert.assertEquals(barbieBestDecorItems, null);
+        Assert.assertNotEquals(kenBestClothingItems, null);
+
+        Boolean result = Barbie.swapBestByCategory(Ken, "Decor", "Clothing");
+
+        Assert.assertEquals(result,false);
+        
+        //empty vendor
+        Vendor Stacie = new Vendor("Stacie");
+        Boolean falseResult = Stacie.swapBestByCategory(Ken, "Decor", "Clothing");
+        Assert.assertEquals(falseResult,false);
+    }
+
+}       
+
