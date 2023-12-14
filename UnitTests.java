@@ -76,7 +76,7 @@ public class UnitTests {
 
         Assert.assertEquals("One of the vendors' inventory does not contain item", result);
         Assert.assertFalse(Viktor.checkAvailability(itemB)); // remains as False
-        Assert.assertTrue(Ellie.checkAvailability(itemC)); // itemC reains in Ellie's inventory
+        Assert.assertTrue(Ellie.checkAvailability(itemC)); // itemC remains in Ellie's inventory
 
     }
 

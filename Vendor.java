@@ -115,7 +115,7 @@ public class Vendor {
         }
 
         for (Item item : listByCategory) {
-            if (item.category.equals(category) && item.condition > bestCondition) {
+            if (item.condition > bestCondition) {
                 bestCondition = item.condition;
                 bestConditionItem = item;
             }

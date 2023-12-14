@@ -9,6 +9,7 @@ public abstract class Item {
     protected int itemID;
     protected String category = "";
     protected double condition;
+    protected int age;
 
     public Item(String category, int id){
         this.category = category;
