@@ -17,6 +17,7 @@ public class Vendor {
         this.inventory = new ArrayList<>();
         this.name = name;
         // serviceManager = ServiceManager.getInstance();
+        // serviceManager.addVendor(this);
     }
 
     public Vendor(String name, List<Item> inventory) {
@@ -29,7 +30,7 @@ public class Vendor {
     public void setServiceManager(ServiceManager manager) {
         serviceManager = manager;
     }
-    
+
     public String toString() {
         return name;
     }
@@ -140,4 +141,27 @@ public class Vendor {
         return false;
     }
 
+    public String getVendorWithInventory() {
+        StringBuilder result = new StringBuilder();
+        result.append(name).append(":[");
+    
+        for (Item item : inventory) {
+            result.append("(")
+                    .append(item.getCategory())
+                    .append(", itemID:")
+                    .append(item.getItemID())
+                    .append(", condition:")
+                    .append(item.getCondition())
+                    .append("),");
+        }
+    
+        // Remove the trailing comma if there are items
+        if (!inventory.isEmpty()) {
+            result.deleteCharAt(result.length() - 1);
+        }
+    
+        result.append("]");
+    
+        return result.toString();
+    }
 }

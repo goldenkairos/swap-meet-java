@@ -42,6 +42,10 @@ public abstract class Item {
         return this.category+".itemID" + this.itemID;
     }
 
+    public String getCategory(){
+        return this.category;
+    }
+
     protected int getItemID(){
         return this.itemID;
     }
