@@ -1,9 +1,9 @@
 class Electronics extends Item {
-    public Electronics(int itemID){
-        super("Electronics", itemID);
+    public Electronics(){
+        super("Electronics");
     }
 
-    public Electronics(int itemID, double condition){
-        super("Electronics", itemID, condition);
+    public Electronics( double condition){
+        super("Electronics",condition);
     }
 }

@@ -6,8 +6,10 @@ public class Main {
 
         Decor newHat = new Decor(0);
         System.out.println(newHat.category);
-        newHat.setItemID(3);
+        // newHat.setItemID(3);
         System.out.println(newHat.getItemID());
+        Clothing newShirt = new Clothing(5);
+        System.out.println(newShirt.getItemID());
 
         vendor1.inventory.add(newHat);
         

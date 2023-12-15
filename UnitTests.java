@@ -133,12 +133,12 @@ public class UnitTests {
 
     @Test
     public void testItemGetSetCondition() {
-        Decor itemA = new Decor(1);
+        Decor itemA = new Decor();
         Assert.assertEquals(0.0, itemA.getCondition(), 0.001);
         itemA.setCondition(.5);
         Assert.assertEquals("Gently pre-loved, like a well-worn teddy bears.", itemA.conditionDescription());
 
-        Clothing itemB = new Clothing(2, 3.5);
+        Clothing itemB = new Clothing(3.5);
         Assert.assertEquals(3.5, itemB.getCondition(), 0.001);
         itemB.setCondition(5);
         Assert.assertEquals("Mint condition. It's practically a museum piece.", itemB.conditionDescription());
@@ -152,12 +152,12 @@ public class UnitTests {
 
     @Test
     public void testgetBestByCategory() {
-        Decor itemA = new Decor(1);
-        Clothing itemB = new Clothing(2, 3.5);
-        Clothing itemF = new Clothing(3, 3.5);
-        Electronics itemC = new Electronics(4, 5);
-        Electronics itemD = new Electronics(5, 2.5);
-        Electronics itemE = new Electronics(6, 3.5);
+        Decor itemA = new Decor();
+        Clothing itemB = new Clothing( 3.5);
+        Clothing itemF = new Clothing(3.5);
+        Electronics itemC = new Electronics(5);
+        Electronics itemD = new Electronics( 2.5);
+        Electronics itemE = new Electronics( 3.5);
 
         // unique item with the best condition
         Vendor Barbie = new Vendor("Barbie", Arrays.asList(itemA, itemB, itemC, itemD, itemE));
@@ -182,13 +182,13 @@ public class UnitTests {
 
     @Test
     public void swapBestByCategoryTrue() {
-        Decor itemA = new Decor(1, 3);
-        Clothing itemB = new Clothing(2, 3.5);
-        Electronics itemC = new Electronics(4, 5);
-        Electronics itemD = new Electronics(5, 2.5);
-        Electronics itemE = new Electronics(6, 3.5);
-        Decor itemG = new Decor(7, 4.5);
-        Clothing itemF = new Clothing(3, 3.5);
+        Decor itemA = new Decor( 3);
+        Clothing itemB = new Clothing( 3.5);
+        Electronics itemC = new Electronics( 5);
+        Electronics itemD = new Electronics( 2.5);
+        Electronics itemE = new Electronics( 3.5);
+        Decor itemG = new Decor(4.5);
+        Clothing itemF = new Clothing(3.5);
 
         List<Item> barbieItems = new ArrayList<>(Arrays.asList(itemA, itemB, itemC, itemD, itemE));
         Vendor Barbie = new Vendor("Barbie", barbieItems);
@@ -210,13 +210,13 @@ public class UnitTests {
 
     @Test
     public void swapBestByCategoryFalse() {
-        Decor itemA = new Decor(1, 3);
-        Clothing itemB = new Clothing(2, 3.5);
-        Electronics itemC = new Electronics(4, 5);
-        Electronics itemD = new Electronics(5, 2.5);
-        Electronics itemE = new Electronics(6, 3.5);
-        Decor itemG = new Decor(7, 4.5);
-        Clothing itemF = new Clothing(3, 3.5);
+        Decor itemA = new Decor( 3);
+        Clothing itemB = new Clothing(3.5);
+        Electronics itemC = new Electronics( 5);
+        Electronics itemD = new Electronics( 2.5);
+        Electronics itemE = new Electronics(3.5);
+        Decor itemG = new Decor( 4.5);
+        Clothing itemF = new Clothing( 3.5);
 
         // swapping invalid item
         List<Item> barbieItems = new ArrayList<>(Arrays.asList(itemB, itemC, itemD, itemE));

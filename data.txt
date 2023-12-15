@@ -1,0 +1,5 @@
+Vendor1|Decor|D001|2.5|Electronic|E001|4.0|Clothing|C001|3.5
+Vendor2|Electronic|E002|3.0|Decor|D002|2.0|Clothing|C002|4.5
+Vendor3|Clothing|C003|3.5|Decor|D003|1.5|Electronic|E003|4.2
+Vendor4|Decor|D004|2.8|Clothing|C004|4.0|Electronic|E004|3.8
+Vendor5|Electronic|E005|4.5|Decor|D005|3.2|Clothing|C005|2.0

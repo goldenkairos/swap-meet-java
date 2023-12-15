@@ -5,21 +5,29 @@ public abstract class Item {
 
     //Constructor should have category and itemID
     //TO DO in Item, we will create a unique itemID and pass it to the subclass as we create an instance
-    
+    private static int itemCount = 0;
+    private static final Object lockObject = new Object();
+
     protected int itemID;
     protected String category = "";
     protected double condition;
     protected int age;
 
-    public Item(String category, int id){
+    public Item(String category){
         this.category = category;
-        this.itemID = id;
+            synchronized(lockObject){
+                this.itemID = ++itemCount;
+            }
+        // this.itemID = id;
         this.condition = 0.0;
     }
 
-    public Item(String category, int id, double condition){
+    public Item(String category, double condition){
         this.category = category;
-        this.itemID = id;
+        // this.itemID = id;
+        synchronized(lockObject){
+                this.itemID = ++itemCount;
+            }
         this.condition = condition;
     }
 
@@ -41,7 +49,12 @@ public abstract class Item {
     }
 
     protected void setCondition(double condition){
-        this.condition = condition;
+        if(condition >5 || condition <0){
+            System.out.println("Please enter item condition between 0 and 5");
+        } else {
+            this.condition = condition;
+        }
+        
     }
 
     protected String conditionDescription(){
