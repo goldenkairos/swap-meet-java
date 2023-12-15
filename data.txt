@@ -1,5 +1,6 @@
-Vendor1|Decor|001|2.5|Electronics|002|4.0|Clothing|003|3.5
-Vendor2|Electronics|004|3.0|Decor|005|2.0|Clothing|006|4.5
-Vendor3|Clothing|007|3.5|Decor|008|1.5|Electronics|009|4.2
-Vendor4|Decor|010|2.8|Clothing|011|4.0|Electronics|012|3.8
-Vendor5|Electronics|013|4.5|Decor|014|3.2|Clothing|015|2.0
+|Vendor1|Decor|I1|2.5|Electronics|I2|4.0|Clothing|I3|3.5|
+|Vendor2|Electronics|I4|3.0|Decor|I5|2.0|Clothing|I6|4.5|
+|Vendor3|Clothing|I7|3.5|Decor|I8|1.5|Electronics|I9|4.2|
+|Vendor4|Decor|I10|2.8|Clothing|I11|4.0|Electronics|I12|3.8|
+|Vendor5|Electronics|I13|4.5|Decor|I14|3.2|Clothing|I15|2.0|
+|Yuki|Decor|I1|0.0|Decor|I3|1.0|Decor|I4|2.0|Electronics|I5|3.0|

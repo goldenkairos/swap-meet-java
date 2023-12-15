@@ -42,17 +42,5 @@ public class ServiceManager implements Serializable {
         return null;
     }
 
-    // // Load vendors from the file
-    // private List<Vendor> loadVendorsFromDataFile() {
-
-    //     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data.txt"))) {
-    //         @SuppressWarnings("unchecked")
-    //         List<Vendor> vendors = (List<Vendor>) ois.readObject();
-    //         return vendors;
-    //     } catch (IOException | ClassNotFoundException e) {
-    //         // If the file doesn't exist or an exception occurs, return an empty list
-    //         return new ArrayList<>();
-    //     }
-    // }
 }
 

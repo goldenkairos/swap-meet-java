@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -60,11 +62,22 @@ public class FileManager {
 }
 
 
-    public static void saveDataFile(List<Vendor> vendors) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(DATA_FILE_PATH))) {
-            oos.writeObject(vendors);
-        } catch (IOException e) {
-            e.printStackTrace();
+public static void saveDataFile(List<Vendor> vendors) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_FILE_PATH))) {
+        for (Vendor vendor : vendors) {
+            // Write vendor name
+            writer.write("|" + vendor.toString() + "|");
+
+            // Write vendor inventory
+            for (Item item : vendor.inventory) {
+                writer.write(item.getCategory() + "|" + "I" + item.getItemID() + "|" + item.getCondition() + "|");
+            }
+
+            // End of vendor entry
+            writer.newLine();
         }
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
 }
