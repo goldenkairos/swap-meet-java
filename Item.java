@@ -31,6 +31,12 @@ public abstract class Item {
         this.condition = condition;
     }
 
+    public Item(String category, int itemID, double condition){
+        this.category = category;
+        this.itemID = itemID;
+        this.condition = condition;
+    }
+
     @Override
     public String toString(){
         return this.category+".itemID" + this.itemID;
@@ -45,7 +51,7 @@ public abstract class Item {
     }
 
     protected double getCondition(){
-        return this.condition; //or item.condition?
+        return this.condition;
     }
 
     protected void setCondition(double condition){
@@ -53,8 +59,7 @@ public abstract class Item {
             System.out.println("Please enter item condition between 0 and 5");
         } else {
             this.condition = condition;
-        }
-        
+        }       
     }
 
     protected String conditionDescription(){

@@ -5,12 +5,10 @@ import java.util.Iterator;
 
 public class Vendor {
 
-    // Vendor constructor with inventory list by default
-    // When we instantiate an instance of Vendor, we can optionally pass in a list
-    // with the keyword argument inventory =>figure it out, constructor
-    // overloading???
-
-    // add and remove method:
+    public static ServiceManager serviceManager;
+    static {
+        serviceManager = ServiceManager.getInstance();
+    }
 
     protected String name;
     public List<Item> inventory;
@@ -18,13 +16,20 @@ public class Vendor {
     public Vendor(String name) {
         this.inventory = new ArrayList<>();
         this.name = name;
+        // serviceManager = ServiceManager.getInstance();
     }
 
     public Vendor(String name, List<Item> inventory) {
         this.name = name;
         this.inventory = inventory; /// Use "this" to refer to the instance variable
+        // serviceManager.addVendor(this);
+
     }
 
+    public void setServiceManager(ServiceManager manager) {
+        serviceManager = manager;
+    }
+    
     public String toString() {
         return name;
     }
