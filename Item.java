@@ -19,7 +19,7 @@ public abstract class Item {
                 this.itemID = ++itemCount;
             }
         // this.itemID = id;
-        this.condition = 0.0;
+        this.condition = 0;
     }
 
     public Item(String category, double condition){

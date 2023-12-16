@@ -5,7 +5,7 @@ public class Main {
         System.out.println(vendor1.toString());
         vendor1.setName("Yuki");
 
-        Decor newHat = new Decor(0);
+        Decor newHat = new Decor(1.5);
         System.out.println(newHat.category);
         // newHat.setItemID(3);
         System.out.println(newHat.getItemID());

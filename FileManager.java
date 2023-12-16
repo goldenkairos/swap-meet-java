@@ -22,7 +22,8 @@ public class FileManager {
 
             // Assuming Vendor has a constructor that accepts the vendor name
             Vendor vendor = new Vendor(parts[0]);
-
+            // Instantiate the appropriate subclass based on the category
+                Item item;
             // Start parsing the inventory from index 1 (after the vendor name)
             for (int i = 1; i < parts.length; i += 3) {
                 // Assuming the format is category|itemId|condition
@@ -30,22 +31,28 @@ public class FileManager {
                 int itemId = Integer.parseInt(parts[i + 1]);
                 double condition = Double.parseDouble(parts[i + 2]);
 
-                // Instantiate the appropriate subclass based on the category
-                Item item;
+                
                 switch (category) {
                     case "Decor":
-                        item = new Decor(itemId, condition);
+                         item = new Decor(itemId, condition);
                         break;
                     case "Clothing":
-                        item = new Clothing(itemId, condition);
+                         item = new Clothing(itemId, condition);
                         break;
                     case "Electronics":
-                        item = new Electronics(itemId, condition);
+                         item = new Electronics(itemId, condition);
                         break;
                     // Add more cases for other categories if needed
                     default:
                         throw new IllegalArgumentException("Unknown category: " + category);
                 }
+                // Item item;
+                // try {
+                //     Class<?> itemClass = Class.forName(category);
+                //     item = (Item) itemClass.getDeclaredConstructor(int.class, double.class).newInstance(itemId, condition);
+                // } catch ( ReflectiveOperationException e) {
+                //     throw new IllegalArgumentException("Unknown category: " + category, e);
+                // }
 
                 // Add the item to the vendor's inventory
                 
@@ -57,7 +64,6 @@ public class FileManager {
     } catch (IOException e) {
         e.printStackTrace();
     }
-    System.out.println("Vendors are"+vendors);
     return vendors;
 }
 
@@ -66,11 +72,11 @@ public static void saveDataFile(List<Vendor> vendors) {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_FILE_PATH))) {
         for (Vendor vendor : vendors) {
             // Write vendor name
-            writer.write("|" + vendor.toString() + "|");
+            writer.write(vendor.toString() + "|");
 
             // Write vendor inventory
             for (Item item : vendor.inventory) {
-                writer.write(item.getCategory() + "|" + "I" + item.getItemID() + "|" + item.getCondition() + "|");
+                writer.write(item.getCategory() + "|" + item.getItemID() + "|" + item.getCondition() + "|");
             }
 
             // End of vendor entry
