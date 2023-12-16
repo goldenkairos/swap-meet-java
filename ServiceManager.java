@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceManager implements Serializable {
@@ -26,6 +27,18 @@ public class ServiceManager implements Serializable {
 
     public List<Vendor> getAllVendors() {
         return vendors;
+    }
+
+    public List<String> getallVendorsAndInventory(){
+    List<String> output = new ArrayList<>();
+    for (Vendor vendor : vendors) {
+        if (!output.isEmpty()) {
+            output.add("\n");
+        }
+        output.add(vendor.getVendorWithInventory());
+    }
+    return output;
+
     }
 
     public void addVendor(Vendor vendor) {
