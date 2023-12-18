@@ -1,23 +1,26 @@
 public class Main {
     public static void main(String[] args){
         
-        Vendor vendor1 = new Vendor("Victor");
-        System.out.println(vendor1.toString());
-        vendor1.setName("Yuki");
+        // Vendor vendor1 = new Vendor("Victor");
+        // System.out.println(vendor1.toString());
+        Vendor vendor1 = new Vendor("Yuki");
 
-        Decor newHat = new Decor(1.5);
-        System.out.println(newHat.category);
-        // newHat.setItemID(3);
-        System.out.println(newHat.getItemID());
-        Clothing newShirt = new Clothing(5);
-        System.out.println(newShirt.getItemID());
+        Decor newHat = new Decor();
+        Electronics newDrum = new Electronics();
+        // System.out.println(newHat.category);
+        // // newHat.setItemID(3);
+        // System.out.println(newHat.getItemID());
+        // Clothing newShirt = new Clothing(5);
+        // System.out.println(newShirt.getItemID());
 
         vendor1.inventory.add(newHat);
+        vendor1.inventory.add(newDrum);
+
         
-        vendor1.inventory.add(new Decor(1));
-        vendor1.inventory.add(new Decor(2));
-        vendor1.inventory.add(new Electronics(3));
-        // vendor1.inventory.add(new Clothing(4));
+        // vendor1.inventory.add(new Decor(1));
+        vendor1.inventory.add(new Decor(10,2.5));
+        // vendor1.inventory.add(new Electronics(3));
+        // // vendor1.inventory.add(new Clothing(4));
 
         ServiceManager serviceManager = ServiceManager.getInstance();
         
