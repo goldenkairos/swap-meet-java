@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ServiceManager implements Serializable {
     private List<Vendor> vendors;
@@ -52,5 +53,54 @@ public class ServiceManager implements Serializable {
         return null;
     }
 
+    public void createNewVendorAndInventory(){
+        Scanner scanner = new Scanner(System.in);
+        String vendorName = getVendorNameFromUser(scanner);
+        Vendor newVendor = new Vendor(vendorName);
+        
+        String itemCategory = getItemCategoryFromUser(scanner, newVendor);
+        double itemCondition = getItemConditionFromUser(scanner);
+
+        Item item = createItemFromUserInput(itemCategory, itemCondition);
+        newVendor.add(item);
+        addVendor(newVendor);
+
+
+    }
+
+    public static String getVendorNameFromUser(Scanner scanner){
+        System.out.print("Enter the vendor name: ");
+
+       String userInputVendorName = scanner.nextLine();
+
+       return userInputVendorName;
+    }
+
+    public static String getItemCategoryFromUser(Scanner scanner, Vendor vendor){
+        System.out.print("Enter the category of item you would like to add to "+vendor.toString()+"\'s inventory ");
+        String userInputCategory = scanner.nextLine();
+        return userInputCategory;
+    }
+
+    public static double getItemConditionFromUser(Scanner scanner){
+        System.out.print("Enter the condition of this item: ");
+        double userInputItemCondition = scanner.nextDouble();
+        return userInputItemCondition;
+    }
+
+    public static Item createItemFromUserInput(String category, double condition){
+        Item item = null;
+        if (category.equals("Decor")){
+            item = new Decor(condition);
+        } else if (category.equals("Clothing")){
+            item = new Clothing(condition);
+        } else if (category.equals("Electronics")){
+            item = new Electronics(condition);
+        } else {
+            System.out.println("Incorrect category");
+        }
+        return item;
+
+    }
 }
 

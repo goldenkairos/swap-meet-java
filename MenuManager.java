@@ -22,7 +22,8 @@ public class MenuManager {
                     System.out.println(serviceManager.getallVendorsAndInventory());
                     break;
                 case 2:
-                    System.out.println("2");
+                    System.out.println("Add a new vendor");
+                    serviceManager.createNewVendorAndInventory();
                     break;
                 case 3:
                     System.out.println("3");

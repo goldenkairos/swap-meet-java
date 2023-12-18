@@ -5,3 +5,4 @@ Vendor4|Decor|10|2.8|Clothing|11|4.0|Electronics|12|3.8
 Vendor5|Electronics|13|4.5|Decor|14|3.2|Clothing|15|2.0
 Yuki|Decor|348|0.0|Electronics|836|0.0|Decor|10|2.5
 Yuki|Decor|718|0.0|Electronics|580|0.0|Decor|10|2.5
+

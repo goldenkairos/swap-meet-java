@@ -26,7 +26,7 @@ public abstract class Item {
         this.category = category;
         // this.itemID = id;
         synchronized(lockObject){
-                this.itemID = ++itemCount;
+                this.itemID = ++itemCount + (int)Math.floor(Math.random() *(1000-1+1)+1);
             }
         this.condition = condition;
     }
