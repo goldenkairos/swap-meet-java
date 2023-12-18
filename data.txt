@@ -3,8 +3,5 @@ Vendor2|Electronics|4|3.0|Decor|5|2.0|Clothing|6|4.5
 Vendor3|Clothing|7|3.5|Decor|8|1.5|Electronics|9|4.2
 Vendor4|Decor|10|2.8|Clothing|11|4.0|Electronics|12|3.8
 Vendor5|Electronics|13|4.5|Decor|14|3.2|Clothing|15|2.0
-Yuki|Decor|839|0.0|Electronics|24|0.0|Decor|10|2.5
-Yuki|Decor|128|0.0|Electronics|89|0.0|Decor|10|2.5
-Yuki|Decor|492|0.0|Electronics|991|0.0|Decor|10|2.5
-Yuki|Decor|124|0.0|Electronics|869|0.0|Decor|10|2.5
-Yuki|Decor|848|0.0|Electronics|591|0.0|Decor|10|2.5
+Yuki|Decor|348|0.0|Electronics|836|0.0|Decor|10|2.5
+Yuki|Decor|718|0.0|Electronics|580|0.0|Decor|10|2.5
