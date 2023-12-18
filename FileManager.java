@@ -76,7 +76,12 @@ public static void saveDataFile(List<Vendor> vendors) {
 
             // Write vendor inventory
             for (Item item : vendor.inventory) {
-                writer.write(item.getCategory() + "|" + item.getItemID() + "|" + item.getCondition() + "|");
+                writer.write(item.getCategory() + "|" + item.getItemID() + "|" + item.getCondition());
+
+                // Check if it's not the last item in the inventory, then add separator
+                if (vendor.inventory.indexOf(item) < vendor.inventory.size() - 1) {
+                    writer.write("|");
+                }
             }
 
             // End of vendor entry

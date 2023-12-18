@@ -32,10 +32,7 @@ public class ServiceManager implements Serializable {
     public List<String> getallVendorsAndInventory(){
     List<String> output = new ArrayList<>();
     for (Vendor vendor : vendors) {
-        if (!output.isEmpty()) {
-            output.add("\n");
-        }
-        output.add(vendor.getVendorWithInventory());
+        output.add(vendor.getVendorWithInventory()+"\n");
     }
     return output;
 
