@@ -36,7 +36,7 @@ public class MenuManager {
                     serviceManager.getVendorInventory();
                     break;
                 case 5:
-                    System.out.println("5");
+                    serviceManager.addItemtoVendorInventory();
                     break;
                 case 6:
                     System.out.println("6");

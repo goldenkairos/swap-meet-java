@@ -60,12 +60,13 @@ public class ServiceManager implements Serializable {
 
         boolean addingItem = true;
         while (addingItem) {
-            String itemCategory = getItemCategoryFromUser(scanner, newVendor);
-            double itemCondition = getItemConditionFromUser(scanner);
-            scanner.nextLine(); // Consume the newline character
+            addItemtoVendor(newVendor, scanner);
+            // String itemCategory = getItemCategoryFromUser(scanner, newVendor);
+            // double itemCondition = getItemConditionFromUser(scanner);
+            // scanner.nextLine(); // Consume the newline character
 
-            Item item = createItemFromUserInput(itemCategory, itemCondition);
-            newVendor.add(item);
+            // Item item = createItemFromUserInput(itemCategory, itemCondition);
+            // newVendor.add(item);
 
             System.out.print("Do you want to add another item? (y/n): ");
             String userResponse = scanner.nextLine().toLowerCase();
@@ -76,6 +77,15 @@ public class ServiceManager implements Serializable {
 
         }
         addVendor(newVendor);
+    }
+
+    public void addItemtoVendor(Vendor newVendor, Scanner scanner) {
+        String itemCategory = getItemCategoryFromUser(scanner, newVendor);
+        double itemCondition = getItemConditionFromUser(scanner);
+        scanner.nextLine(); // Consume the newline character
+
+        Item item = createItemFromUserInput(itemCategory, itemCondition);
+        newVendor.add(item);
     }
 
     // Receive user input for new vendor's name
@@ -106,7 +116,7 @@ public class ServiceManager implements Serializable {
     public static String getItemCategoryFromUser(Scanner scanner, Vendor vendor) {
         while (true) {
             System.out.print(
-                    "\nEnter the category of item you would like to add to " + vendor.toString() + "\'s inventory ");
+                    "\nEnter the category of item you would like to add to " + vendor.toString() + "\'s inventory (Decor, Electronics or Clothing): ");
 
             if (scanner.hasNextLine()) {
                 String userInputCategory = scanner.nextLine().trim().toLowerCase();
@@ -184,6 +194,29 @@ public class ServiceManager implements Serializable {
                 viewingVendor = false;
             }
         }
+    }
+
+    public void addItemtoVendorInventory() {
+        boolean addingItem = true;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Select the vendor you would like to view inventory - ");
+        String vendorNameFromuser = getVendorNameFromUser(scanner);
+        Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+
+        if (vendor != null) {
+            while (addingItem) {
+                addItemtoVendor(vendor, scanner);
+
+                System.out.print("Do you want to add another item? (y/n): ");
+                String userResponse = scanner.nextLine().toLowerCase();
+
+                if (userResponse.equals("n")) {
+                    addingItem = false;
+                }
+            }
+        }
+        FileManager.saveDataFile(this.vendors);
+        System.out.println("Item(s) have been successfully added to " + vendor.toString() +"\'s inventory!");
     }
 
 }
