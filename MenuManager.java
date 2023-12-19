@@ -11,7 +11,6 @@ public class MenuManager {
     }
 
     public static void runMenu() {
-        // scanner = new Scanner(System.in);
 
         do {
             displayMenu();
@@ -57,13 +56,15 @@ public class MenuManager {
                     break;
             }
         
+        //Consume newline character
         scanner.nextLine();
+
         System.out.println("\nPress Enter to continue...");
-        scanner.nextLine();
+        scanner.nextLine();// Wait for user to press Enter
 
         } while (showMenu);
 
-        System.out.println("Goodbye!");
+        System.out.println("Exiting out of SwapMeet Application. Goodbye!");
         scanner.close();
     }
 

@@ -54,15 +54,15 @@ public class ServiceManager implements Serializable {
     }
 
     public void createNewVendorAndInventory() {
-        Scanner scanner = new Scanner(System.in);        
+        Scanner scanner = new Scanner(System.in);
         String vendorName = getVendorNameFromUser(scanner);
         Vendor newVendor = new Vendor(vendorName);
 
         boolean addingItem = true;
-        while(addingItem){
+        while (addingItem) {
             String itemCategory = getItemCategoryFromUser(scanner, newVendor);
             double itemCondition = getItemConditionFromUser(scanner);
-            scanner.nextLine();  // Consume the newline character
+            scanner.nextLine(); // Consume the newline character
 
             Item item = createItemFromUserInput(itemCategory, itemCondition);
             newVendor.add(item);
@@ -70,21 +70,32 @@ public class ServiceManager implements Serializable {
             System.out.print("Do you want to add another item? (y/n): ");
             String userResponse = scanner.nextLine().toLowerCase();
 
-            if (userResponse.equals("n")){
+            if (userResponse.equals("n")) {
                 addingItem = false;
             }
-            
+
         }
         addVendor(newVendor);
     }
 
-    //Receive user input for new vendor's name
+    // Receive user input for new vendor's name
     public static String getVendorNameFromUser(Scanner scanner) {
-        System.out.print("Enter the vendor name: ");
+        while (true) {
+            System.out.print("Enter the vendor name: ");
 
-        String userInputVendorName = scanner.nextLine();
+            if (scanner.hasNextLine()) {
 
-        return userInputVendorName;
+                String userInputVendorName = scanner.nextLine().trim();
+                if (!userInputVendorName.isEmpty()) {
+                    return userInputVendorName;
+                } else {
+                    System.out.print("Invalid input. Vendor name cannot be empty.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid vendor name");
+            }
+        }
+
     }
 
     public static String getItemCategoryFromUser(Scanner scanner, Vendor vendor) {
