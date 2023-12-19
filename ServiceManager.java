@@ -30,15 +30,6 @@ public class ServiceManager implements Serializable {
         return vendors;
     }
 
-    public List<String> getallVendorsAndInventory() {
-        List<String> output = new ArrayList<>();
-        for (Vendor vendor : vendors) {
-            output.add(vendor.getVendorWithInventory() + "\n");
-        }
-        return output;
-
-    }
-
     public void addVendor(Vendor vendor) {
         this.vendors.add(vendor);
         FileManager.saveDataFile(this.vendors);
@@ -51,32 +42,6 @@ public class ServiceManager implements Serializable {
             }
         }
         return null;
-    }
-
-    public void createNewVendorAndInventory() {
-        Scanner scanner = new Scanner(System.in);
-        String vendorName = getVendorNameFromUser(scanner);
-        Vendor newVendor = new Vendor(vendorName);
-
-        boolean addingItem = true;
-        while (addingItem) {
-            addItemtoVendor(newVendor, scanner);
-            // String itemCategory = getItemCategoryFromUser(scanner, newVendor);
-            // double itemCondition = getItemConditionFromUser(scanner);
-            // scanner.nextLine(); // Consume the newline character
-
-            // Item item = createItemFromUserInput(itemCategory, itemCondition);
-            // newVendor.add(item);
-
-            System.out.print("Do you want to add another item? (y/n): ");
-            String userResponse = scanner.nextLine().toLowerCase();
-
-            if (userResponse.equals("n")) {
-                addingItem = false;
-            }
-
-        }
-        addVendor(newVendor);
     }
 
     public void addItemtoVendor(Vendor newVendor, Scanner scanner) {
@@ -116,7 +81,8 @@ public class ServiceManager implements Serializable {
     public static String getItemCategoryFromUser(Scanner scanner, Vendor vendor) {
         while (true) {
             System.out.print(
-                    "\nEnter the category of item you would like to add to " + vendor.toString() + "\'s inventory (Decor, Electronics or Clothing): ");
+                    "\nEnter the category of item you would like to add to " + vendor.toString()
+                            + "\'s inventory (Decor, Electronics or Clothing): ");
 
             if (scanner.hasNextLine()) {
                 String userInputCategory = scanner.nextLine().trim().toLowerCase();
@@ -149,6 +115,45 @@ public class ServiceManager implements Serializable {
         return item;
     }
 
+    // Menu Option 1 to list all vendors and inventories
+    public List<String> getallVendorsAndInventory() {
+        List<String> output = new ArrayList<>();
+        for (Vendor vendor : vendors) {
+            output.add(vendor.getVendorWithInventory() + "\n");
+        }
+        return output;
+
+    }
+
+    // Menu Option 2 to create new vendor and adding item(s) to vendor's inventory
+    // list
+    public void createNewVendorAndInventory() {
+        Scanner scanner = new Scanner(System.in);
+        String vendorName = getVendorNameFromUser(scanner);
+        Vendor newVendor = new Vendor(vendorName);
+
+        boolean addingItem = true;
+        while (addingItem) {
+            addItemtoVendor(newVendor, scanner);
+            // String itemCategory = getItemCategoryFromUser(scanner, newVendor);
+            // double itemCondition = getItemConditionFromUser(scanner);
+            // scanner.nextLine(); // Consume the newline character
+
+            // Item item = createItemFromUserInput(itemCategory, itemCondition);
+            // newVendor.add(item);
+
+            System.out.print("Do you want to add another item? (y/n): ");
+            String userResponse = scanner.nextLine().toLowerCase();
+
+            if (userResponse.equals("n")) {
+                addingItem = false;
+            }
+
+        }
+        addVendor(newVendor);
+    }
+
+    // Menu Option 3 to modify vendor name of existing vendor
     public void updateVendorName() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Select the vendor you would like to modify - ");
@@ -173,6 +178,7 @@ public class ServiceManager implements Serializable {
         }
     }
 
+    // Menu Option 4 to get inventory list of specific vendor
     public void getVendorInventory() {
         boolean viewingVendor = true;
         Scanner scanner = new Scanner(System.in);
@@ -196,6 +202,7 @@ public class ServiceManager implements Serializable {
         }
     }
 
+    // Menu Option 5 to add item to specific vendor's inventory
     public void addItemtoVendorInventory() {
         boolean addingItem = true;
         Scanner scanner = new Scanner(System.in);
@@ -216,7 +223,7 @@ public class ServiceManager implements Serializable {
             }
         }
         FileManager.saveDataFile(this.vendors);
-        System.out.println("Item(s) have been successfully added to " + vendor.toString() +"\'s inventory!");
+        System.out.println("Item(s) have been successfully added to " + vendor.toString() + "\'s inventory!");
     }
 
 }
