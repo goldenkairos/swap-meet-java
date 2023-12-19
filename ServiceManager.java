@@ -54,17 +54,28 @@ public class ServiceManager implements Serializable {
     }
 
     public void createNewVendorAndInventory() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);        
         String vendorName = getVendorNameFromUser(scanner);
         Vendor newVendor = new Vendor(vendorName);
 
-        String itemCategory = getItemCategoryFromUser(scanner, newVendor);
-        double itemCondition = getItemConditionFromUser(scanner);
+        boolean addingItem = true;
+        while(addingItem){
+            String itemCategory = getItemCategoryFromUser(scanner, newVendor);
+            double itemCondition = getItemConditionFromUser(scanner);
+            scanner.nextLine();  // Consume the newline character
 
-        Item item = createItemFromUserInput(itemCategory, itemCondition);
-        newVendor.add(item);
+            Item item = createItemFromUserInput(itemCategory, itemCondition);
+            newVendor.add(item);
+
+            System.out.print("Do you want to add another item? (y/n): ");
+            String userResponse = scanner.nextLine().toLowerCase();
+
+            if (userResponse.equals("n")){
+                addingItem = false;
+            }
+            
+        }
         addVendor(newVendor);
-
     }
 
     public static String getVendorNameFromUser(Scanner scanner) {
