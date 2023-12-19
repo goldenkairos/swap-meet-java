@@ -33,7 +33,7 @@ public class MenuManager {
                     serviceManager.updateVendorName();
                     break;
                 case 4:
-                    System.out.println("4");
+                    serviceManager.getVendorInventory();
                     break;
                 case 5:
                     System.out.println("5");

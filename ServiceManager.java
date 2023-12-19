@@ -139,28 +139,51 @@ public class ServiceManager implements Serializable {
         return item;
     }
 
-    public void updateVendorName(){
+    public void updateVendorName() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Select the vendor you would like to modify - ");
         String vendorNameFromuser = getVendorNameFromUser(scanner);
 
         Vendor vendor = instance.getVendorByName(vendorNameFromuser);
 
-        if(vendor!=null){
-        String oldName = vendor.toString();
+        if (vendor != null) {
+            String oldName = vendor.toString();
 
-        System.out.print("\nEnter the updated name: ");
-        String updatedVendorName = scanner.nextLine();
+            System.out.print("\nEnter the updated name: ");
+            String updatedVendorName = scanner.nextLine();
 
-        vendor.setName(updatedVendorName);
+            vendor.setName(updatedVendorName);
 
-        FileManager.saveDataFile(this.vendors);
+            FileManager.saveDataFile(this.vendors);
 
-        String output = "Vendor " +oldName+" has been updated to: " + vendor.toString();
-        System.out.println(output);
-    } else {
-        System.out.println("This vendor does not exist in our database.");
-    } 
+            String output = "Vendor " + oldName + " has been updated to: " + vendor.toString();
+            System.out.println(output);
+        } else {
+            System.out.println("This vendor does not exist in our database.");
+        }
+    }
+
+    public void getVendorInventory() {
+        boolean viewingVendor = true;
+        Scanner scanner = new Scanner(System.in);
+        while (viewingVendor) {
+
+            System.out.print("Select the vendor you would like to view inventory - ");
+            String vendorNameFromuser = getVendorNameFromUser(scanner);
+            Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+            if (vendor != null) {
+                System.out.println(vendor.getVendorWithInventory());
+            } else {
+                System.out.println("This vendor does not exist in our database.");
+            }
+
+            System.out.print("\nDo you want to look up another vendor? (y/n): ");
+            String userResponse = scanner.nextLine().toLowerCase();
+
+            if (userResponse.equals("n")) {
+                viewingVendor = false;
+            }
+        }
     }
 
 }

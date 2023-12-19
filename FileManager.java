@@ -45,17 +45,6 @@ public class FileManager {
                         default:
                             throw new IllegalArgumentException("Unknown category: " + category);
                     }
-                    // Item item;
-                    // try {
-                    // Class<?> itemClass = Class.forName(category);
-                    // item = (Item) itemClass.getDeclaredConstructor(int.class,
-                    // double.class).newInstance(itemId, condition);
-                    // } catch ( ReflectiveOperationException e) {
-                    // throw new IllegalArgumentException("Unknown category: " + category, e);
-                    // }
-
-                    // Add the item to the vendor's inventory
-
                     vendor.add(item);
                 }
 

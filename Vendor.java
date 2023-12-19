@@ -142,26 +142,32 @@ public class Vendor {
     }
 
     public String getVendorWithInventory() {
-        StringBuilder result = new StringBuilder();
-        result.append(name).append(":[");
-    
-        for (Item item : inventory) {
-            result.append("(")
-                    .append(item.getCategory())
-                    .append(", itemID:")
-                    .append(item.getItemID())
-                    .append(", condition:")
-                    .append(item.getCondition())
-                    .append("),");
-        }
-    
-        // Remove the trailing comma if there are items
-        if (!inventory.isEmpty()) {
-            result.deleteCharAt(result.length() - 1);
-        }
-    
-        result.append("]");
-    
-        return result.toString();
+        // StringBuilder result = new StringBuilder();
+        // result.append(name).append(":[");
+
+        // for (Item item : inventory) {
+        // result.append("(")
+        // .append(item.getCategory())
+        // .append(", itemID:")
+        // .append(item.getItemID())
+        // .append(", condition:")
+        // .append(item.getCondition())
+        // .append("),");
+        // }
+
+        // // Remove the trailing comma if there are items
+        // if (!inventory.isEmpty()) {
+        // result.deleteCharAt(result.length() - 1);
+        // }
+
+        // result.append("]");
+
+        // return result.toString();
+        String inventoryString = String.join("", inventory.stream()
+                .map(item -> String.format("Category: %s,\titemID: %d, condition: %.2f\n",
+                        item.getCategory(), item.getItemID(), item.getCondition()))
+                .toArray(String[]::new));
+
+        return String.format("%s:\n%s", this.toString(), inventoryString);
     }
 }
