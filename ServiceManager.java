@@ -78,6 +78,7 @@ public class ServiceManager implements Serializable {
         addVendor(newVendor);
     }
 
+    //Receive user input for new vendor's name
     public static String getVendorNameFromUser(Scanner scanner) {
         System.out.print("Enter the vendor name: ");
 
@@ -110,6 +111,5 @@ public class ServiceManager implements Serializable {
             System.out.println("Incorrect category");
         }
         return item;
-
     }
 }

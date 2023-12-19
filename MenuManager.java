@@ -53,12 +53,14 @@ public class MenuManager {
                     System.out.println("11");
                     break;
                 case 12:
-                    System.out.println("12");
-                    break;
-                case 13:
                     showMenu = false;
                     break;
             }
+        
+        scanner.nextLine();
+        System.out.println("\nPress Enter to continue...");
+        scanner.nextLine();
+
         } while (showMenu);
 
         System.out.println("Goodbye!");
@@ -79,17 +81,16 @@ public class MenuManager {
         System.out.println("9. Get the best item by category for a vendor");
         System.out.println("10. Swap specific items between vendors");
         System.out.println("11. Swap the best items between vendors");
-        System.out.println("12. Optional - Swap first items between vendors");
-        System.out.println("13. Exit");
+        System.out.println("12. Exit");
     }
 
     public static int getUserChoice(Scanner scanner) {
-        System.out.print("Enter the menu option you would like to select(1-13): ");
+        System.out.print("Enter the menu option you would like to select(1-12): ");
 
         while (!scanner.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a menu option between 1 to 13.");
+            System.out.println("Invalid input. Please enter a menu option between 1 to 12.");
             scanner.next();
-            System.out.print("Enter the menu option you would like to select (1-13): ");
+            System.out.print("Enter the menu option you would like to select (1-12): ");
         }
         return scanner.nextInt();
     }
