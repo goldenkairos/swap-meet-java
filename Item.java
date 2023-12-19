@@ -59,7 +59,7 @@ public abstract class Item {
     }
 
     protected void setCondition(double condition){
-        if(condition >5 || condition <0){
+        if(condition > 5 || condition < 0){
             System.out.println("Please enter item condition between 0 and 5");
         } else {
             this.condition = condition;

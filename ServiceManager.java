@@ -86,6 +86,11 @@ public class ServiceManager implements Serializable {
             if (scanner.hasNextLine()) {
 
                 String userInputVendorName = scanner.nextLine().trim();
+
+                // if (MenuManager.manualExit(scanner)){
+                // return null;
+                // }
+
                 if (!userInputVendorName.isEmpty()) {
                     return userInputVendorName;
                 } else {
@@ -99,9 +104,21 @@ public class ServiceManager implements Serializable {
     }
 
     public static String getItemCategoryFromUser(Scanner scanner, Vendor vendor) {
-        System.out.print("Enter the category of item you would like to add to " + vendor.toString() + "\'s inventory ");
-        String userInputCategory = scanner.nextLine();
-        return userInputCategory;
+        while (true) {
+            System.out.print(
+                    "\nEnter the category of item you would like to add to " + vendor.toString() + "\'s inventory ");
+
+            if (scanner.hasNextLine()) {
+                String userInputCategory = scanner.nextLine().trim().toLowerCase();
+
+                if (!userInputCategory.isEmpty() && userInputCategory.equals("decor")
+                        || userInputCategory.equals("clothing") || userInputCategory.equals("electronics")) {
+                    return userInputCategory;
+                } else {
+                    System.out.print("Invalid input. Item category must be Decor or Clothing or Electronics.");
+                }
+            }
+        }
     }
 
     public static double getItemConditionFromUser(Scanner scanner) {
@@ -112,15 +129,38 @@ public class ServiceManager implements Serializable {
 
     public static Item createItemFromUserInput(String category, double condition) {
         Item item = null;
-        if (category.equals("Decor")) {
+        if (category.toLowerCase().equals("decor")) {
             item = new Decor(condition);
-        } else if (category.equals("Clothing")) {
+        } else if (category.toLowerCase().equals("clothing")) {
             item = new Clothing(condition);
-        } else if (category.equals("Electronics")) {
+        } else if (category.toLowerCase().equals("electronics")) {
             item = new Electronics(condition);
-        } else {
-            System.out.println("Incorrect category");
         }
         return item;
     }
+
+    public void updateVendorName(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Select the vendor you would like to modify - ");
+        String vendorNameFromuser = getVendorNameFromUser(scanner);
+
+        Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+
+        if(vendor!=null){
+        String oldName = vendor.toString();
+
+        System.out.print("\nEnter the updated name: ");
+        String updatedVendorName = scanner.nextLine();
+
+        vendor.setName(updatedVendorName);
+
+        FileManager.saveDataFile(this.vendors);
+
+        String output = "Vendor " +oldName+" has been updated to: " + vendor.toString();
+        System.out.println(output);
+    } else {
+        System.out.println("This vendor does not exist in our database.");
+    } 
+    }
+
 }

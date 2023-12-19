@@ -16,6 +16,11 @@ public class MenuManager {
             displayMenu();
             int userInput = getUserChoice(scanner);
 
+            // if (manualExit(scanner)){
+            //     showMenu = false;
+            //     break;
+            // }
+
             switch (userInput) {
                 case 1:
                     System.out.println(serviceManager.getallVendorsAndInventory());
@@ -25,7 +30,7 @@ public class MenuManager {
                     serviceManager.createNewVendorAndInventory();
                     break;
                 case 3:
-                    System.out.println("3");
+                    serviceManager.updateVendorName();
                     break;
                 case 4:
                     System.out.println("4");
@@ -54,14 +59,16 @@ public class MenuManager {
                 case 12:
                     showMenu = false;
                     break;
+
             }
-        
-        //Consume newline character
-        scanner.nextLine();
 
-        System.out.println("\nPress Enter to continue...");
-        scanner.nextLine();// Wait for user to press Enter
+            // Consume newline character
+            scanner.nextLine();
 
+            if (userInput < 12) {
+                System.out.println("\nPress Enter to continue...");
+                scanner.nextLine();// Wait for user to press Enter
+            }
         } while (showMenu);
 
         System.out.println("Exiting out of SwapMeet Application. Goodbye!");
@@ -95,4 +102,10 @@ public class MenuManager {
         }
         return scanner.nextInt();
     }
+
+    // public static boolean manualExit(Scanner scanner) {
+    //    String userExitPrompt = scanner.nextLine().trim().toLowerCase();
+    //     return userExitPrompt.equals("exit");
+
+    // }
 }
