@@ -44,12 +44,14 @@ public class ServiceManager implements Serializable {
         return null;
     }
 
-    public boolean checkExistingVendor(String name){
+    public boolean checkExistingVendor(String name) {
         Vendor vendor = getVendorByName(name);
 
-        if (vendor!=null){
+        if (vendor != null) {
             return true;
-        } else {return false;}
+        } else {
+            return false;
+        }
     }
 
     public void addItemtoVendor(Vendor newVendor, Scanner scanner) {
@@ -137,14 +139,14 @@ public class ServiceManager implements Serializable {
         String vendorName = getVendorNameFromUser(scanner);
         boolean newVendorCheck = true;
 
-        while (newVendorCheck){
-        if (checkExistingVendor(vendorName)){
-            System.out.print("This vendor name already exists in the database. Please choose another name: ");
-            vendorName = getVendorNameFromUser(scanner);        
-        } else {
-            newVendorCheck  = true;
+        while (newVendorCheck) {
+            if (checkExistingVendor(vendorName)) {
+                System.out.print("This vendor name already exists in the database. Please choose another name: ");
+                vendorName = getVendorNameFromUser(scanner);
+            } else {
+                newVendorCheck = false;
+            }
         }
-    }
 
         Vendor newVendor = new Vendor(vendorName);
 
@@ -163,19 +165,29 @@ public class ServiceManager implements Serializable {
     }
 
     // Menu Option 3 to modify vendor name of existing vendor
-    // add non-case senstive check to allow user to type differently
     public void updateVendorName() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Select the vendor name you would like to modify: ");
         String vendorNameFromuser = getVendorNameFromUser(scanner);
 
         Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+        // boolean existingVendorCheck = true;
 
         if (vendor != null) {
             String oldName = vendor.toString();
 
             System.out.print("\nEnter the updated name: ");
             String updatedVendorName = scanner.nextLine();
+            boolean existingVendorCheck = true;
+
+            while (existingVendorCheck) {
+                if (checkExistingVendor(updatedVendorName)) {
+                    System.out.print("This vendor name already exists in the database. Please choose another name: ");
+                    updatedVendorName = getVendorNameFromUser(scanner);
+                } else {
+                    existingVendorCheck = false;
+                }
+            }
 
             vendor.setName(updatedVendorName);
 
