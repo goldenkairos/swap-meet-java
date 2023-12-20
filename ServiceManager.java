@@ -37,11 +37,19 @@ public class ServiceManager implements Serializable {
 
     public Vendor getVendorByName(String name) {
         for (Vendor vendor : vendors) {
-            if (vendor.toString().equals(name)) {
+            if (vendor.toString().toLowerCase().equals(name.toLowerCase())) {
                 return vendor;
             }
         }
         return null;
+    }
+
+    public boolean checkExistingVendor(String name){
+        Vendor vendor = getVendorByName(name);
+
+        if (vendor!=null){
+            return true;
+        } else {return false;}
     }
 
     public void addItemtoVendor(Vendor newVendor, Scanner scanner) {
@@ -97,12 +105,14 @@ public class ServiceManager implements Serializable {
         }
     }
 
+    // NOTE: Add validation check to make sure user only enters between 0-5.0
     public static double getItemConditionFromUser(Scanner scanner) {
         System.out.print("Enter the condition of this item: ");
         double userInputItemCondition = scanner.nextDouble();
         return userInputItemCondition;
     }
 
+    // NOTE: can we switch to switch/case?
     public static Item createItemFromUserInput(String category, double condition) {
         Item item = null;
         if (category.toLowerCase().equals("decor")) {
@@ -135,12 +145,6 @@ public class ServiceManager implements Serializable {
         boolean addingItem = true;
         while (addingItem) {
             addItemtoVendor(newVendor, scanner);
-            // String itemCategory = getItemCategoryFromUser(scanner, newVendor);
-            // double itemCondition = getItemConditionFromUser(scanner);
-            // scanner.nextLine(); // Consume the newline character
-
-            // Item item = createItemFromUserInput(itemCategory, itemCondition);
-            // newVendor.add(item);
 
             System.out.print("Do you want to add another item? (y/n): ");
             String userResponse = scanner.nextLine().toLowerCase();
@@ -148,12 +152,12 @@ public class ServiceManager implements Serializable {
             if (userResponse.equals("n")) {
                 addingItem = false;
             }
-
         }
         addVendor(newVendor);
     }
 
     // Menu Option 3 to modify vendor name of existing vendor
+    // add non-case senstive check to allow user to type differently
     public void updateVendorName() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Select the vendor you would like to modify - ");
@@ -194,9 +198,9 @@ public class ServiceManager implements Serializable {
             }
 
             System.out.print("\nDo you want to look up another vendor? (y/n): ");
-            String userResponse = scanner.nextLine().toLowerCase();
+            String userResponse = scanner.nextLine();
 
-            if (userResponse.equals("n")) {
+            if (userResponse.toLowerCase().equals("n")) {
                 viewingVendor = false;
             }
         }
@@ -215,9 +219,9 @@ public class ServiceManager implements Serializable {
                 addItemtoVendor(vendor, scanner);
 
                 System.out.print("Do you want to add another item? (y/n): ");
-                String userResponse = scanner.nextLine().toLowerCase();
+                String userResponse = scanner.nextLine();
 
-                if (userResponse.equals("n")) {
+                if (userResponse.toLowerCase().equals("n")) {
                     addingItem = false;
                 }
             }
@@ -227,3 +231,6 @@ public class ServiceManager implements Serializable {
     }
 
 }
+
+// Create a method to check if the name already exists. Add that to validtiono
+// Option menu2 and 3

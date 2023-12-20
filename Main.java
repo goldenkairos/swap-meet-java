@@ -10,7 +10,7 @@ public class Main {
         // System.out.println(newHat.category);
         // // newHat.setItemID(3);
         // System.out.println(newHat.getItemID());2
-        
+
         // Clothing newShirt = new Clothing(5);
         // System.out.println(newShirt.getItemID());
 
