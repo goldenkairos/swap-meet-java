@@ -191,6 +191,10 @@ public class ServiceManager implements Serializable {
         return itemFromUserID;
     }
 
+    public boolean promptNextStep(Scanner scanner) {
+        return !scanner.nextLine().toLowerCase().equals("n");
+    }
+
     // Menu Option 1 to list all vendors and inventories
     public List<String> getallVendorsAndInventory() {
         List<String> output = new ArrayList<>();
@@ -257,21 +261,18 @@ public class ServiceManager implements Serializable {
         Scanner scanner = new Scanner(System.in);
         while (viewingVendor) {
 
-            System.out.print("Select name of the vendor you would like to view inventory: ");
+            System.out.print("\nSelect name of the vendor you would like to view inventory: ");
             String vendorNameFromuser = getVendorNameFromUser(scanner);
             Vendor vendor = instance.getVendorByName(vendorNameFromuser);
             if (vendor != null) {
                 System.out.println(vendor.getVendorWithInventory());
             } else {
-                System.out.println("This vendor does not exist in our database.");
+                System.out.println("This vendor does not exist in our database.\n");
             }
 
-            System.out.println("Do you want to look up another vendor? (y/n): ");
-            String userResponse = scanner.nextLine();
+            System.out.print("Do you want to look up another vendor? (y/n): ");
+            viewingVendor = promptNextStep(scanner);
 
-            if (userResponse.toLowerCase().equals("n")) {
-                viewingVendor = false;
-            }
         }
     }
 
@@ -288,11 +289,7 @@ public class ServiceManager implements Serializable {
                 addItemtoVendor(vendor, scanner);
 
                 System.out.print("Do you want to add another item? (y/n): ");
-                String userResponse = scanner.nextLine();
-
-                if (userResponse.toLowerCase().equals("n")) {
-                    addingItem = false;
-                }
+                addingItem = promptNextStep(scanner);
             }
         }
         FileManager.saveDataFile(this.vendors);
@@ -328,7 +325,7 @@ public class ServiceManager implements Serializable {
             }
 
             System.out.print("\nDo you want to remove another item? (y/n): ");
-            removingItem = promptNextStep();
+            removingItem = promptNextStep(scanner);
 
             if (!removingItem) {
                 System.out.println(
@@ -336,14 +333,6 @@ public class ServiceManager implements Serializable {
                                 + vendor.getVendorWithInventory());
             }
         }
-
-    }
-
-    public boolean promptNextStep() {
-        // boolean check = true;
-        Scanner scanner = new Scanner(System.in);
-        // String userResponse = scanner.nextLine();
-        return !scanner.nextLine().toLowerCase().equals("n");
 
     }
 }
