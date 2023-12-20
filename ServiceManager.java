@@ -64,15 +64,9 @@ public class ServiceManager implements Serializable {
     // Receive user input for new vendor's name
     public static String getVendorNameFromUser(Scanner scanner) {
         while (true) {
-            System.out.print("Enter the vendor name: ");
-
             if (scanner.hasNextLine()) {
 
                 String userInputVendorName = scanner.nextLine().trim();
-
-                // if (MenuManager.manualExit(scanner)){
-                // return null;
-                // }
 
                 if (!userInputVendorName.isEmpty()) {
                     return userInputVendorName;
@@ -139,7 +133,19 @@ public class ServiceManager implements Serializable {
     // list
     public void createNewVendorAndInventory() {
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter new vendor name: ");
         String vendorName = getVendorNameFromUser(scanner);
+        boolean newVendorCheck = true;
+
+        while (newVendorCheck){
+        if (checkExistingVendor(vendorName)){
+            System.out.print("This vendor name already exists in the database. Please choose another name: ");
+            vendorName = getVendorNameFromUser(scanner);        
+        } else {
+            newVendorCheck  = true;
+        }
+    }
+
         Vendor newVendor = new Vendor(vendorName);
 
         boolean addingItem = true;
@@ -160,7 +166,7 @@ public class ServiceManager implements Serializable {
     // add non-case senstive check to allow user to type differently
     public void updateVendorName() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Select the vendor you would like to modify - ");
+        System.out.print("Select the vendor name you would like to modify: ");
         String vendorNameFromuser = getVendorNameFromUser(scanner);
 
         Vendor vendor = instance.getVendorByName(vendorNameFromuser);
@@ -188,7 +194,7 @@ public class ServiceManager implements Serializable {
         Scanner scanner = new Scanner(System.in);
         while (viewingVendor) {
 
-            System.out.print("Select the vendor you would like to view inventory - ");
+            System.out.print("Select name of the vendor you would like to view inventory: ");
             String vendorNameFromuser = getVendorNameFromUser(scanner);
             Vendor vendor = instance.getVendorByName(vendorNameFromuser);
             if (vendor != null) {
@@ -210,7 +216,7 @@ public class ServiceManager implements Serializable {
     public void addItemtoVendorInventory() {
         boolean addingItem = true;
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Select the vendor you would like to view inventory - ");
+        System.out.print("Select name of the vendor you would like to view inventory: ");
         String vendorNameFromuser = getVendorNameFromUser(scanner);
         Vendor vendor = instance.getVendorByName(vendorNameFromuser);
 

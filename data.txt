@@ -5,3 +5,4 @@ Vendor4|Decor|10|2.8|Clothing|11|4.0|Electronics|12|3.8
 Vendor5|Electronics|13|4.5|Decor|14|3.2|Clothing|15|2.0
 Diego|Clothing|667|2.0|Decor|865|3.0|Decor|448|5.0|Clothing|351|2.5
 Mia|Decor|465|3.0|Clothing|113|2.0|Electronics|944|3.5|Decor|540|4.0
+Mia|Decor|123|2.0

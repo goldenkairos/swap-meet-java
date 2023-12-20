@@ -30,7 +30,8 @@ public class Main {
         // adding new vendor
         // serviceManager.addVendor(vendor1);
 
-        // updating data file
+        // updating data file2
+    
         // System.out.println(serviceManager.getAllVendors());
         // System.out.println(serviceManager.getallVendorsAndInventory());
         MenuManager menuManager = new MenuManager(serviceManager);
