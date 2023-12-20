@@ -17,7 +17,8 @@ public class Main {
         // vendor1.inventory.add(newHat);
         // vendor1.inventory.add(newDrum);
 
-        // vendor1.inventory.add(new Decor(1));
+        // vendor1.inventory.add(new Decor(1));5
+    
         // vendor1.inventory.add(new Decor(10,2.5));
         // vendor1.inventory.add(new Electronics(3));
         // // vendor1.inventory.add(new Clothing(4));
@@ -27,7 +28,7 @@ public class Main {
         // System.out.println(vendor1.toString()+"'s inventory list before swaping:
         // "+vendor1.inventory);
 
-        // adding new vendor
+        // adding new vendor6
         // serviceManager.addVendor(vendor1);
 
         // updating data file2

@@ -164,8 +164,8 @@ public class Vendor {
 
         // return result.toString();
         String inventoryString = String.join("", inventory.stream()
-                .map(item -> String.format("Category: %s,\titemID: %d, condition: %.2f\n",
-                        item.getCategory(), item.getItemID(), item.getCondition()))
+                .map(item -> String.format("ItemID: %d, Condition: %.2f, Category: %s\n",
+                        item.getItemID(), item.getCondition(), item.getCategory()))
                 .toArray(String[]::new));
 
         return String.format("%s:\n%s", this.toString(), inventoryString);

@@ -30,7 +30,7 @@ public class ServiceManager implements Serializable {
         return vendors;
     }
 
-    public void addVendor(Vendor vendor) {
+    public void addVendorToFile(Vendor vendor) {
         this.vendors.add(vendor);
         FileManager.saveDataFile(this.vendors);
     }
@@ -123,6 +123,12 @@ public class ServiceManager implements Serializable {
         return userInputItemCondition;
     }
 
+    public static int getItemIDFromUser(Scanner scanner) {
+        System.out.print("Enter the itemID of the item you would like to remove: ");
+        int userInputItemID = scanner.nextInt();
+        return userInputItemID;
+    }
+
     // NOTE: can we switch to switch/case?
     public static Item createItemFromUserInput(String category, double condition) {
         Item item = null;
@@ -134,6 +140,44 @@ public class ServiceManager implements Serializable {
             item = new Electronics(condition);
         }
         return item;
+    }
+
+    public Item getItemByItemID(Vendor vendor, int userItemID) {
+        for (Item item : vendor.inventory) {
+            if (item.getItemID() == userItemID) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public boolean checkExistingItem(Vendor vendor, int userItemID) {
+        Item item = getItemByItemID(vendor, userItemID);
+
+        if (item != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Item promptUserForValidItemId(Vendor vendor, Scanner scanner) {
+        int itemID = getItemIDFromUser(scanner);
+        boolean itemDatabaseCheck = false;
+
+        while (!itemDatabaseCheck) {
+            if (!checkExistingItem(vendor, itemID)) {
+                System.out.print("Item does not exist in " + vendor.toString()
+                        + "\'s inventory. Please select another itemID: ");
+                itemID = getItemIDFromUser(scanner);
+            } else {
+                itemDatabaseCheck = true;
+            }
+        }
+        scanner.nextLine();
+
+        Item itemFromUserID = getItemByItemID(vendor, itemID);
+        return itemFromUserID;
     }
 
     // Menu Option 1 to list all vendors and inventories
@@ -167,7 +211,7 @@ public class ServiceManager implements Serializable {
                 addingItem = false;
             }
         }
-        addVendor(newVendor);
+        addVendorToFile(newVendor);
     }
 
     // Menu Option 3 to modify vendor name of existing vendor
@@ -211,7 +255,7 @@ public class ServiceManager implements Serializable {
                 System.out.println("This vendor does not exist in our database.");
             }
 
-            System.out.print("\nDo you want to look up another vendor? (y/n): ");
+            System.out.println("Do you want to look up another vendor? (y/n): ");
             String userResponse = scanner.nextLine();
 
             if (userResponse.toLowerCase().equals("n")) {
@@ -224,7 +268,7 @@ public class ServiceManager implements Serializable {
     public void addItemtoVendorInventory() {
         boolean addingItem = true;
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Select name of the vendor you would like to view inventory: ");
+        System.out.print("Select name of the vendor you would like to add to inventory: ");
         String vendorNameFromuser = getVendorNameFromUser(scanner);
         Vendor vendor = instance.getVendorByName(vendorNameFromuser);
 
@@ -244,7 +288,49 @@ public class ServiceManager implements Serializable {
         System.out.println("Item(s) have been successfully added to " + vendor.toString() + "\'s inventory!");
     }
 
-}
+    public void removeItemFromSpecificVendor() {
+        boolean removingItem = true;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Select name of the vendor you would like to modify: ");
+        String vendorNameFromuser = getVendorNameFromUser(scanner);
+        Vendor vendor = instance.getVendorByName(vendorNameFromuser);
 
-// Create a method to check if the name already exists. Add that to validtiono
-// Option menu2 and 3
+        if (vendor.inventory.size() > 0) {
+            System.out.println("Here is the inventory listing of vendor " + vendor.getVendorWithInventory());
+            while (removingItem) {
+
+                if (vendor.inventory.size() > 0) {
+                    Item removedItem = promptUserForValidItemId(vendor, scanner);
+                    int removedItemId = removedItem.getItemID();
+                    vendor.remove(removedItem);
+                    System.out
+                            .println("Item"+ removedItemId+ " has been successfully removed from " + vendor.toString() + "\'s inventory!");
+                    FileManager.saveDataFile(this.vendors);
+
+                }
+                if (vendor.inventory.size() == 0) {
+                    removingItem = false;
+                    System.out.println(
+                            "Vendor " + vendor.toString() + "\'s has no item in inventory. Item removal process is completed.");
+                    break;
+                }
+                System.out.print("\nDo you want to add another item? (y/n): ");
+                String userResponse = scanner.nextLine();
+                if (userResponse.toLowerCase().equals("n")) {
+                    removingItem = false;
+                    // FileManager.saveDataFile(this.vendors);
+
+                    System.out.println(
+                            "Item removal process is completed. Here is the updated invendory listing of vendor "
+                                    + vendor.getVendorWithInventory());
+                }
+
+            }
+
+        } else {
+            System.out.println(
+                    "Vendor " + vendor.toString() + "\'s inventory is empty! We cannot remove any item.");
+            return;
+        }
+    }
+}

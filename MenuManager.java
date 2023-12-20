@@ -26,7 +26,6 @@ public class MenuManager {
                     System.out.println(serviceManager.getallVendorsAndInventory());
                     break;
                 case 2:
-                    System.out.println("Add a new vendor");
                     serviceManager.createNewVendorAndInventory();
                     break;
                 case 3:
@@ -39,7 +38,7 @@ public class MenuManager {
                     serviceManager.addItemtoVendorInventory();
                     break;
                 case 6:
-                    System.out.println("6");
+                    serviceManager.removeItemFromSpecificVendor();
                     break;
                 case 7:
                     System.out.println("7");
