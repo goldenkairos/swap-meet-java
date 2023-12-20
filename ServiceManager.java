@@ -78,6 +78,16 @@ public class ServiceManager implements Serializable {
         newVendor.add(item);
     }
 
+    public void removeItemfromVendor(Vendor vendor, Scanner scanner) {
+        Item removedItem = promptUserForValidItemId(vendor, scanner);
+        int removedItemId = removedItem.getItemID();
+        vendor.remove(removedItem);
+        System.out
+                .println("ItemID:" + removedItemId + " has been successfully removed from " + vendor.toString()
+                        + "\'s inventory!");
+        FileManager.saveDataFile(this.vendors);
+    }
+
     // Receive user input for new vendor's name
     public static String getVendorNameFromUser(Scanner scanner) {
         while (true) {
@@ -167,8 +177,9 @@ public class ServiceManager implements Serializable {
 
         while (!itemDatabaseCheck) {
             if (!checkExistingItem(vendor, itemID)) {
-                System.out.print("Item does not exist in " + vendor.toString()
-                        + "\'s inventory. Please select another itemID: ");
+                System.out.println("Item does not exist in " + vendor.toString()
+                        + "\'s inventory. Please select another itemID. ");
+                // scanner.nextLine();
                 itemID = getItemIDFromUser(scanner);
             } else {
                 itemDatabaseCheck = true;
@@ -288,49 +299,51 @@ public class ServiceManager implements Serializable {
         System.out.println("Item(s) have been successfully added to " + vendor.toString() + "\'s inventory!");
     }
 
+    // Menu Option 6 to remove item from specific vendor when providing a valid
+    // itemID
     public void removeItemFromSpecificVendor() {
-        boolean removingItem = true;
         Scanner scanner = new Scanner(System.in);
         System.out.print("Select name of the vendor you would like to modify: ");
         String vendorNameFromuser = getVendorNameFromUser(scanner);
         Vendor vendor = instance.getVendorByName(vendorNameFromuser);
 
-        if (vendor.inventory.size() > 0) {
-            System.out.println("Here is the inventory listing of vendor " + vendor.getVendorWithInventory());
-            while (removingItem) {
-
-                if (vendor.inventory.size() > 0) {
-                    Item removedItem = promptUserForValidItemId(vendor, scanner);
-                    int removedItemId = removedItem.getItemID();
-                    vendor.remove(removedItem);
-                    System.out
-                            .println("Item"+ removedItemId+ " has been successfully removed from " + vendor.toString() + "\'s inventory!");
-                    FileManager.saveDataFile(this.vendors);
-
-                }
-                if (vendor.inventory.size() == 0) {
-                    removingItem = false;
-                    System.out.println(
-                            "Vendor " + vendor.toString() + "\'s has no item in inventory. Item removal process is completed.");
-                    break;
-                }
-                System.out.print("\nDo you want to add another item? (y/n): ");
-                String userResponse = scanner.nextLine();
-                if (userResponse.toLowerCase().equals("n")) {
-                    removingItem = false;
-                    // FileManager.saveDataFile(this.vendors);
-
-                    System.out.println(
-                            "Item removal process is completed. Here is the updated invendory listing of vendor "
-                                    + vendor.getVendorWithInventory());
-                }
-
-            }
-
-        } else {
-            System.out.println(
-                    "Vendor " + vendor.toString() + "\'s inventory is empty! We cannot remove any item.");
+        // immidiate return if vendor does not have any inventory
+        if (vendor.inventory.isEmpty()) {
+            System.out.println("Vendor " + vendor.toString() + "'s inventory is empty! We cannot remove any items.");
             return;
         }
+
+        boolean removingItem = true;
+        System.out.println("\nHere is the inventory listing of vendor " + vendor.getVendorWithInventory());
+
+        while (removingItem && !vendor.inventory.isEmpty()) {
+            removeItemfromVendor(vendor, scanner);
+
+            if (vendor.inventory.size() == 0) {
+                removingItem = false;
+                System.out.println(
+                        "Vendor " + vendor.toString()
+                                + "\'s no longer has any item in inventory. Item removal process is completed!");
+                break;
+            }
+
+            System.out.print("\nDo you want to remove another item? (y/n): ");
+            removingItem = promptNextStep();
+
+            if (!removingItem) {
+                System.out.println(
+                        "Item removal process is completed. Here is the updated invendory listing of vendor "
+                                + vendor.getVendorWithInventory());
+            }
+        }
+
+    }
+
+    public boolean promptNextStep() {
+        // boolean check = true;
+        Scanner scanner = new Scanner(System.in);
+        // String userResponse = scanner.nextLine();
+        return !scanner.nextLine().toLowerCase().equals("n");
+
     }
 }

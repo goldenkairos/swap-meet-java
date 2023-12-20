@@ -1,9 +1,9 @@
-Alez|Decor|94|3.0
-Kaching|Clothing|6|4.5|Decor|408|3.0
-Yoshi|Decor|8|1.5|Electronics|9|4.2
+Alez|Clothing|314|3.4|Electronics|121|5.0
+Kaching|Decor|786|3.3|Clothing|415|2.9|Electronics|584|1.5
+Yoshi|Electronics|9|4.2
 Kesha|Clothing|11|4.0|Electronics|12|3.8
 Vendor5|Electronics|13|4.5|Decor|14|3.2|Clothing|15|2.0
 Diego|Clothing|667|2.0|Decor|865|3.0|Decor|448|5.0|Clothing|351|2.5
 Mia|
-Cheddar|
+Cheddar|Electronics|259|3.0
 Alexa|
