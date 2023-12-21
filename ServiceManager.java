@@ -222,9 +222,33 @@ public class ServiceManager implements Serializable {
         return itemFromUserID;
     }
 
+    public void itemLookup(Vendor vendor, Scanner scanner){
+        boolean itemDatabaseCheck = false;
+        int itemID;       
+        do {
+            itemID = getItemIDFromUser(scanner); 
+       
+            if (!checkExistingItem(vendor, itemID)) {
+                System.out.print("Item does not exist in " + vendor.toString()
+                        + "\'s inventory.");
+
+                System.out.print("\nDo you want to lookup another item? (y/n): ");                
+            } else {
+                itemDatabaseCheck = true;
+            }
+    } while (!itemDatabaseCheck) ;
+
+}
+
     public boolean promptNextStep(Scanner scanner) {
         return !scanner.nextLine().toLowerCase().equals("n");
     }
+
+    public String getAllItemDescription(List<Item> items){
+                return String.join("", items.stream()
+                .map(Item::getItemDescription)
+                .toArray(String[]::new));        
+            }
 
     // Menu Option 1 to list all vendors and inventories
     public List<String> getallVendorsAndInventory() {
@@ -366,11 +390,6 @@ public class ServiceManager implements Serializable {
         }
 
             }
-    public String getAllItemDescription(List<Item> items){
-                return String.join("", items.stream()
-                .map(Item::getItemDescription)
-                .toArray(String[]::new));        
-            }
 
     // Menu Option 7 to get all items by category for specific vendor
     public void getItemsByCategoryFromVendor(){
@@ -394,6 +413,33 @@ public class ServiceManager implements Serializable {
             System.out.print("\nDo you want to remove another item? (y/n): ");
             viewingItems = promptNextStep(scanner);
         } while (viewingItems);
+
+    }
+
+    // Menu Option 8 to check availability of an item in vendor inventory
+    public void itemLookUpFromVendor(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Select name of the vendor you would like to view: ");
+        String vendorNameFromuser = getVendorNameFromUser(scanner);
+        Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+
+    //     boolean itemDatabaseCheck = false;
+    //     int itemID;       
+    //     do {
+    //         itemID = getItemIDFromUser(scanner); 
+       
+    //         if (!checkExistingItem(vendor, itemID)) {
+    //             System.out.print("Item does not exist in " + vendor.toString()
+    //                     + "\'s inventory.");
+
+    //             System.out.print("\nDo you want to lookup another item? (y/n): ");                
+    //         } else {
+    //             itemDatabaseCheck = true;
+    //         }
+    //         itemDatabaseCheck = promptNextStep(scanner);
+    //     }
+    //  while (!itemDatabaseCheck) ;
+        itemLookup(vendor,scanner);
 
     }
 }

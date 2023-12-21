@@ -44,7 +44,7 @@ public class MenuManager {
                     serviceManager.getItemsByCategoryFromVendor();
                     break;
                 case 8:
-                    System.out.println("8");
+                serviceManager.itemLookUpFromVendor();
                     break;
                 case 9:
                     System.out.println("9");
