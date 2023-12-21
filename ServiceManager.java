@@ -76,6 +76,7 @@ public class ServiceManager implements Serializable {
 
         Item item = createItemFromUserInput(itemCategory, itemCondition);
         newVendor.add(item);
+        System.out.println("New item ItemID "+item.getItemID()+" has been added!\n" );
     }
 
     public void removeItemfromVendor(Vendor vendor, Scanner scanner) {
@@ -108,10 +109,10 @@ public class ServiceManager implements Serializable {
     }
 
     public static String getItemCategoryFromUser(Scanner scanner, Vendor vendor) {
+        System.out.print(
+                "\nEnter the category of item you would like to add to " + vendor.toString()
+                        + "\'s inventory (Decor, Electronics or Clothing): ");
         while (true) {
-            System.out.print(
-                    "\nEnter the category of item you would like to add to " + vendor.toString()
-                            + "\'s inventory (Decor, Electronics or Clothing): ");
 
             if (scanner.hasNextLine()) {
                 String userInputCategory = scanner.nextLine().trim().toLowerCase();
@@ -120,7 +121,8 @@ public class ServiceManager implements Serializable {
                         || userInputCategory.equals("clothing") || userInputCategory.equals("electronics")) {
                     return userInputCategory;
                 } else {
-                    System.out.print("Invalid input. Item category must be Decor or Clothing or Electronics.");
+                    System.out.print(
+                            "Invalid input. Item category must be Decor or Clothing or Electronics. Please re-enter item category again: ");
                 }
             }
         }
@@ -128,18 +130,42 @@ public class ServiceManager implements Serializable {
 
     // NOTE: Add validation check to make sure user only enters between 0-5.0
     public static double getItemConditionFromUser(Scanner scanner) {
-        System.out.print("Enter the condition of this item: ");
-        double userInputItemCondition = scanner.nextDouble();
-        return userInputItemCondition;
+        System.out.print("Enter the condition of this item (0.0 to 5.0): ");
+        while (true) {
+
+            if (scanner.hasNextDouble()) {
+                double userInputItemCondition = scanner.nextDouble();
+
+                if (userInputItemCondition >= 0.0 && userInputItemCondition <= 5.0) {
+                    return userInputItemCondition;
+                } else {
+                    System.out.print(
+                            "Invalid input: Item condition must be between 0.0 to 5.0. Please enter item condition again: ");
+                }
+            } else {
+                System.out.print(
+                        "Invalid input. Please enter a valid double value: ");
+                scanner.next();
+            }
+        }
     }
 
     public static int getItemIDFromUser(Scanner scanner) {
-        System.out.print("Enter the itemID of the item you would like to remove: ");
-        int userInputItemID = scanner.nextInt();
-        return userInputItemID;
+        // System.out.println("Enter the itemID of the item you would like to remove: ");
+
+        while (true) {
+
+            if (scanner.hasNextInt()) {
+                int userInputItemID = scanner.nextInt();
+                return userInputItemID;
+            } else {
+                System.out.print("Invalid input: ItemID must be an integer. Please enter ItemID again: ");
+                scanner.next();
+            }
+        }
     }
 
-    // NOTE: can we switch to switch/case?
+    // NOTE: use switch/case if we do not want to initiate Item item
     public static Item createItemFromUserInput(String category, double condition) {
         Item item = null;
         if (category.toLowerCase().equals("decor")) {
@@ -172,13 +198,14 @@ public class ServiceManager implements Serializable {
     }
 
     public Item promptUserForValidItemId(Vendor vendor, Scanner scanner) {
+        System.out.print("Enter the itemID of the item you would like to remove: ");
         int itemID = getItemIDFromUser(scanner);
         boolean itemDatabaseCheck = false;
 
         while (!itemDatabaseCheck) {
             if (!checkExistingItem(vendor, itemID)) {
-                System.out.println("Item does not exist in " + vendor.toString()
-                        + "\'s inventory. Please select another itemID. ");
+                System.out.print("Item does not exist in " + vendor.toString()
+                        + "\'s inventory. Please provide a valid ItemID: ");
                 // scanner.nextLine();
                 itemID = getItemIDFromUser(scanner);
             } else {
@@ -219,7 +246,7 @@ public class ServiceManager implements Serializable {
         while (addingItem) {
             addItemtoVendor(newVendor, scanner);
 
-            System.out.print("Do you want to add another item? (y/n): ");
+            System.out.println("Do you want to add another item? (y/n): ");
             String userResponse = scanner.nextLine().toLowerCase();
 
             if (userResponse.equals("n")) {
@@ -300,7 +327,7 @@ public class ServiceManager implements Serializable {
     // itemID
     public void removeItemFromSpecificVendor() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Select name of the vendor you would like to modify: ");
+        System.out.print("Select name of the vendor you would like to remove from inventory: ");
         String vendorNameFromuser = getVendorNameFromUser(scanner);
         Vendor vendor = instance.getVendorByName(vendorNameFromuser);
 

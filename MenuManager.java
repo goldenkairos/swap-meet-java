@@ -75,8 +75,9 @@ public class MenuManager {
     }
 
     public static void displayMenu() {
-        System.out.println("Welcome to Swap Meet application");
-        System.out.println("\nMenu:\n");
+        System.out.println("➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤");
+        System.out.println("                    MENU                     ");  
+        System.out.println("----------------------------------------------");     
         System.out.println("1. List all vendors");
         System.out.println("2. Add a new vendor");
         System.out.println("3. Edit a vendor name");
@@ -89,6 +90,7 @@ public class MenuManager {
         System.out.println("10. Swap specific items between vendors");
         System.out.println("11. Swap the best items between vendors");
         System.out.println("12. Exit");
+        System.out.println("➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤");
     }
 
     public static int getUserChoice(Scanner scanner) {
