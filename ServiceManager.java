@@ -320,7 +320,7 @@ public class ServiceManager implements Serializable {
             }
         }
         FileManager.saveDataFile(this.vendors);
-        System.out.println("Item(s) have been successfully added to " + vendor.toString() + "\'s inventory!");
+        System.out.println("\nProcess completes. Here is the updated inventory listing for vendor" + vendor.getVendorWithInventory());
     }
 
     // Menu Option 6 to remove item from specific vendor when providing a valid

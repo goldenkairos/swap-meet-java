@@ -142,29 +142,8 @@ public class Vendor {
     }
 
     public String getVendorWithInventory() {
-        // StringBuilder result = new StringBuilder();
-        // result.append(name).append(":[");
-
-        // for (Item item : inventory) {
-        // result.append("(")
-        // .append(item.getCategory())
-        // .append(", itemID:")
-        // .append(item.getItemID())
-        // .append(", condition:")
-        // .append(item.getCondition())
-        // .append("),");
-        // }
-
-        // // Remove the trailing comma if there are items
-        // if (!inventory.isEmpty()) {
-        // result.deleteCharAt(result.length() - 1);
-        // }
-
-        // result.append("]");
-
-        // return result.toString();
         String inventoryString = String.join("", inventory.stream()
-                .map(item -> String.format("ItemID: %d, Condition: %.2f, Category: %s\n",
+                .map(item -> String.format("ItemID: %d, \tCondition: %.2f, Category: %s\n",
                         item.getItemID(), item.getCondition(), item.getCategory()))
                 .toArray(String[]::new));
 
