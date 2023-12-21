@@ -6,5 +6,6 @@ Vendor5|Electronics|13|4.5|Decor|14|3.2|Clothing|15|2.0
 Diego|Clothing|667|2.0|Decor|865|3.0|Decor|448|5.0|Clothing|351|2.5
 Mia|Decor|484|2.5|Clothing|117|3.5|Decor|408|3.0
 Cheddar|Electronics|259|3.0|Electronics|644|2.5
-Alexa|Clothing|941|4.5|Electronics|983|1.5|Electronics|299|5.0
-Barbie|Decor|914|3.45|Clothing|188|2.0|Electronics|835|4.5
+Alexa|
+Barbie|Clothing|188|2.0|Electronics|835|4.5
+BigJames|Decor|961|1.5

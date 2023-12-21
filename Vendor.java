@@ -70,12 +70,11 @@ public class Vendor {
         List<Item> output = new ArrayList<Item>();
 
         for (Item item : this.inventory) {
-            if (item.category.equals(category)) {
+            if (item.getCategory().toLowerCase().equals(category)) {
                 output.add(item);
             }
         }
         return output;
-
     }
 
     public String swapItems(Vendor friend, Item myItem, Item theirItem) {

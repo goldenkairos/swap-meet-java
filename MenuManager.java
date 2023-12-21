@@ -17,8 +17,8 @@ public class MenuManager {
             int userInput = getUserChoice(scanner);
 
             // if (manualExit(scanner)){
-            //     showMenu = false;
-            //     break;
+            // showMenu = false;
+            // break;
             // }
 
             switch (userInput) {
@@ -41,7 +41,7 @@ public class MenuManager {
                     serviceManager.removeItemFromSpecificVendor();
                     break;
                 case 7:
-                    System.out.println("7");
+                    serviceManager.getItemsByCategoryFromVendor();
                     break;
                 case 8:
                     System.out.println("8");
@@ -76,8 +76,8 @@ public class MenuManager {
 
     public static void displayMenu() {
         System.out.println("➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤");
-        System.out.println("                    MENU                     ");  
-        System.out.println("----------------------------------------------");     
+        System.out.println("                    MENU                     ");
+        System.out.println("----------------------------------------------");
         System.out.println("1. List all vendors");
         System.out.println("2. Add a new vendor");
         System.out.println("3. Edit a vendor name");
@@ -105,8 +105,8 @@ public class MenuManager {
     }
 
     // public static boolean manualExit(Scanner scanner) {
-    //    String userExitPrompt = scanner.nextLine().trim().toLowerCase();
-    //     return userExitPrompt.equals("exit");
+    // String userExitPrompt = scanner.nextLine().trim().toLowerCase();
+    // return userExitPrompt.equals("exit");
 
     // }
 }

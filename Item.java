@@ -1,3 +1,5 @@
+import java.util.List;
+
 public abstract class Item {
     //abstract class
     //required category //abstract property
@@ -82,5 +84,9 @@ public abstract class Item {
             description ="Mint condition. It's practically a museum piece.";
         }
         return description;
+    }
+
+    protected String getItemDescription(){
+        return String.format("ItemID: %d, \t Condition: %.2f\n", getItemID(), getCondition());
     }
 }

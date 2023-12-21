@@ -199,19 +199,23 @@ public class ServiceManager implements Serializable {
 
     public Item promptUserForValidItemId(Vendor vendor, Scanner scanner) {
         System.out.print("Enter the itemID of the item you would like to remove: ");
-        int itemID = getItemIDFromUser(scanner);
+        // int itemID = getItemIDFromUser(scanner);
         boolean itemDatabaseCheck = false;
-
-        while (!itemDatabaseCheck) {
+        int itemID;       
+        do {
+            itemID = getItemIDFromUser(scanner); 
+       
             if (!checkExistingItem(vendor, itemID)) {
                 System.out.print("Item does not exist in " + vendor.toString()
                         + "\'s inventory. Please provide a valid ItemID: ");
                 // scanner.nextLine();
-                itemID = getItemIDFromUser(scanner);
+                // itemID = getItemIDFromUser(scanner);
             } else {
                 itemDatabaseCheck = true;
             }
         }
+     while (!itemDatabaseCheck) ;
+
         scanner.nextLine();
 
         Item itemFromUserID = getItemByItemID(vendor, itemID);
@@ -360,6 +364,36 @@ public class ServiceManager implements Serializable {
                                 + vendor.getVendorWithInventory());
             }
         }
+
+            }
+    public String getAllItemDescription(List<Item> items){
+                return String.join("", items.stream()
+                .map(Item::getItemDescription)
+                .toArray(String[]::new));        
+            }
+
+    // Menu Option 7 to get all items by category for specific vendor
+    public void getItemsByCategoryFromVendor(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Select name of the vendor you would like to view: ");
+        String vendorNameFromuser = getVendorNameFromUser(scanner);
+        Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+
+        // immidiate return if vendor does not have any inventory
+        if (vendor.inventory.isEmpty()) {
+            System.out.println("Vendor " + vendor.toString() + "'s inventory is empty!");
+            return;
+        }
+        boolean viewingItems = true;
+
+        do {
+            String categoryFromUser = getItemCategoryFromUser(scanner, vendor);
+            List<Item> itemsByCategory = vendor.getByCategory(categoryFromUser);
+            System.out.println(getAllItemDescription(itemsByCategory));
+
+            System.out.print("\nDo you want to remove another item? (y/n): ");
+            viewingItems = promptNextStep(scanner);
+        } while (viewingItems);
 
     }
 }
