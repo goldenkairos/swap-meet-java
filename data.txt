@@ -1,10 +1,10 @@
 Alez|Decor|224|4.0
 Kaching|Decor|786|3.3|Electronics|584|1.5
-Yoshi|Electronics|635|4.5|Electronics|836|3.0
+Yoshi|Electronics|836|3.0|Decor|961|1.5
 Kesha|Electronics|12|3.8|Clothing|117|3.5
 Green Lantern|Electronics|13|4.5|Decor|14|3.2|Clothing|15|2.0
 Diego|
-Mia|Decor|961|1.5|Electronics|259|3.0
+Mia|Electronics|259|3.0|Electronics|635|4.5
 Cheddar|Electronics|644|2.5|Decor|408|3.0
 Alexa|Decor|148|3.5|Decor|193|5.0
 Barbie|Decor|355|3.5|Electronics|116|4.5|Electronics|835|4.5
