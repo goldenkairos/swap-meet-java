@@ -60,11 +60,11 @@ public class ServiceManager implements Serializable {
         while (vendor == null) {
             System.out.print("Select name of the vendor: ");
             String vendorNameFromUser = getVendorNameFromUser(scanner);
-    
+
             if (checkExistingVendor(vendorNameFromUser)) {
                 vendor = instance.getVendorByName(vendorNameFromUser);
             } else {
-                System.out.println("This vendor does not exist in our database. Try again!\n");
+                System.out.println("\nThis vendor does not exist in our database. Try again!\n");
             }
         }
         return vendor;
@@ -115,10 +115,10 @@ public class ServiceManager implements Serializable {
                 if (!userInputVendorName.isEmpty()) {
                     return userInputVendorName;
                 } else {
-                    System.out.print("Invalid input. Vendor name cannot be empty.");
+                    System.out.print("\nInvalid input. Vendor name cannot be empty. Please enter vendor name again: ");
                 }
             } else {
-                System.out.println("Invalid input. Please enter a valid vendor name");
+                System.out.println("\nInvalid input. Please enter a valid vendor name");
             }
         }
 
@@ -170,14 +170,33 @@ public class ServiceManager implements Serializable {
         // System.out.println("Enter the itemID of the item you would like to remove:
         // ");
 
-        while (true) {
+        // while (true) {
 
-            if (scanner.hasNextInt()) {
-                int userInputItemID = scanner.nextInt();
-                return userInputItemID;
+        //     if (scanner.hasNextInt()) {
+        //         int userInputItemID = scanner.nextInt();
+
+        //         if (userInputItemID != -1) {
+        //             return userInputItemID;
+        //         } else {
+        //             System.out.print("\nInvalid input. ItemID cannot be empty. Please enter ItemID again: ");
+        //         }
+        //     } else {
+        //         System.out.print("\nInvalid input: ItemID must be an integer. Please enter ItemID again: ");
+        //         scanner.next();
+        //     }
+        // }
+        while (true) {
+            String userInput = scanner.nextLine().trim();
+    
+            if (!userInput.isEmpty()) {
+                try {
+                    int userInputItemID = Integer.parseInt(userInput);
+                    return userInputItemID;
+                } catch (NumberFormatException e) {
+                    System.out.print("\nInvalid input: ItemID must be an integer. Please enter ItemID again: ");
+                }
             } else {
-                System.out.print("Invalid input: ItemID must be an integer. Please enter ItemID again: ");
-                scanner.next();
+                System.out.print("\nInvalid input. ItemID cannot be empty. Please enter ItemID again: ");
             }
         }
     }
@@ -204,6 +223,7 @@ public class ServiceManager implements Serializable {
         return null;
     }
 
+    // potentially reduce this code. we can use getItemByitemID when null and !=null
     public boolean checkExistingItem(Vendor vendor, int userItemID) {
         Item item = getItemByItemID(vendor, userItemID);
 
@@ -436,52 +456,33 @@ public class ServiceManager implements Serializable {
     }
 
     // // Menu Option 8 to check availability of an item in vendor inventory
-    // public void itemLookUpFromVendor() {
-    //     Scanner scanner = new Scanner(System.in);
-    //     System.out.print("Select name of the vendor you would like to view: ");
-    //     String vendorNameFromuser = getVendorNameFromUser(scanner);
-    //     Vendor vendor = instance.getVendorByName(vendorNameFromuser);
-
-    //     boolean continueLookup = true;
-    //     do {
-    //         System.out.print("Enter the itemID of the item you would like to lookup: ");
-    //         itemIDLookup(vendor, scanner);            
-
-    //         scanner.nextLine();
-    //         System.out.print("\nDo you want to lookup another item? (y/n): ");
-    //         continueLookup = promptNextStep(scanner);
-    //     } while (continueLookup);
-
-    //     System.out.print("Search complete. Directing to Main Menu.");
-    // }
-
     public void itemLookUpFromVendor() {
         Scanner scanner = new Scanner(System.in);
         boolean continueLookup = true;
 
         do {
             Vendor vendor = getValidVendor(scanner);
-    
+
             int itemID;
             do {
                 System.out.print("Enter the itemID of the item you would like to lookup: ");
                 itemID = getItemIDFromUser(scanner);
-    
+
                 if (!checkExistingItem(vendor, itemID)) {
-                    System.out.println("Item does not exist in " + vendor.toString()
-                            + "\'s inventory.");
+                    System.out.print("Item does not exist in " + vendor.toString()
+                            + "\'s inventory.\n");
                 } else {
-                    System.out.println("\nItemID " + itemID + " is found in " + vendor.toString()
+                    System.out.print("\nItemID " + itemID + " is found in " + vendor.toString()
                             + "\'s inventory!\n");
                 }
-                scanner.nextLine();
+                // scanner.nextLine();
                 System.out.print("\nDo you want to lookup another item? (y/n): ");
             } while (promptNextStep(scanner));
-            
+
             System.out.print("\nDo you want to lookup items for another vendor? (y/n): ");
             continueLookup = promptNextStep(scanner);
         } while (continueLookup);
-    
+
         System.out.print("Search complete. Directing to Main Menu.");
     }
 }
