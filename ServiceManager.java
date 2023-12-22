@@ -55,10 +55,11 @@ public class ServiceManager implements Serializable {
         }
     }
 
-    public Vendor getValidVendor(Scanner scanner) {
+    public Vendor getValidVendor(Scanner scanner, String prompt) {
         Vendor vendor = null;
         while (vendor == null) {
-            System.out.print("Select name of the vendor: ");
+            // System.out.print("Select name of the vendor: ");
+            System.out.print(prompt);
             String vendorNameFromUser = getVendorNameFromUser(scanner);
 
             if (checkExistingVendor(vendorNameFromUser)) {
@@ -100,8 +101,8 @@ public class ServiceManager implements Serializable {
         int removedItemId = removedItem.getItemID();
         vendor.remove(removedItem);
         System.out
-                .println("ItemID:" + removedItemId + " has been successfully removed from " + vendor.toString()
-                        + "\'s inventory!");
+                .print("\nItemID:" + removedItemId + " has been successfully removed from " + vendor.toString()
+                        + "\'s inventory!\n");
         FileManager.saveDataFile(this.vendors);
     }
 
@@ -126,8 +127,7 @@ public class ServiceManager implements Serializable {
 
     public static String getItemCategoryFromUser(Scanner scanner, Vendor vendor) {
         System.out.print(
-                "\nEnter the category of item you would like to add to " + vendor.toString()
-                        + "\'s inventory (Decor, Electronics or Clothing): ");
+                "\nEnter the inventory category (Decor, Electronics or Clothing): ");
         while (true) {
 
             if (scanner.hasNextLine()) {
@@ -249,12 +249,12 @@ public class ServiceManager implements Serializable {
                 // itemID = getItemIDFromUser(scanner);
             } else {
                 itemDatabaseCheck = true;
-                System.out.print("Item is found in " + vendor.toString()
-                        + "\'s inventory.");
+                // System.out.print("Item"+itemID+ "is found in " + vendor.toString()
+                //         + "\'s inventory.");
             }
         } while (!itemDatabaseCheck);
 
-        scanner.nextLine();
+        // scanner.nextLine();
 
         Item itemFromUserID = getItemByItemID(vendor, itemID);
         return itemFromUserID;
@@ -325,10 +325,11 @@ public class ServiceManager implements Serializable {
     // Menu Option 3 to modify vendor name of existing vendor
     public void updateVendorName() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Select the vendor name you would like to modify: ");
-        String vendorNameFromuser = getVendorNameFromUser(scanner);
+        // System.out.print("Select the vendor name you would like to modify: ");
+        // String vendorNameFromuser = getVendorNameFromUser(scanner);
 
-        Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+        // Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+        Vendor vendor = getValidVendor(scanner,"\nSelect the vendor name you would like to modify: ");
         // boolean existingVendorCheck = true;
 
         if (vendor != null) {
@@ -354,11 +355,12 @@ public class ServiceManager implements Serializable {
         Scanner scanner = new Scanner(System.in);
         while (viewingVendor) {
 
-            System.out.print("\nSelect name of the vendor you would like to view inventory: ");
-            String vendorNameFromuser = getVendorNameFromUser(scanner);
-            Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+            // System.out.print("\nSelect name of the vendor you would like to view inventory: ");
+            // String vendorNameFromuser = getVendorNameFromUser(scanner);
+            // Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+            Vendor vendor = getValidVendor(scanner,"\nSelect name of the vendor you would like to view inventory: ");
             if (vendor != null) {
-                System.out.println(vendor.getVendorWithInventory());
+                System.out.println("\n"+vendor.getVendorWithInventory());
             } else {
                 System.out.println("This vendor does not exist in our database.\n");
             }
@@ -373,9 +375,10 @@ public class ServiceManager implements Serializable {
     public void addItemtoVendorInventory() {
         boolean addingItem = true;
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Select name of the vendor you would like to add to inventory: ");
-        String vendorNameFromuser = getVendorNameFromUser(scanner);
-        Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+        // System.out.print("Select name of the vendor you would like to add to inventory: ");
+        // String vendorNameFromuser = getVendorNameFromUser(scanner);
+        // Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+        Vendor vendor = getValidVendor(scanner,"Select name of the vendor you would like to add to inventory: ");
 
         if (vendor != null) {
             while (addingItem) {
@@ -394,9 +397,10 @@ public class ServiceManager implements Serializable {
     // itemID
     public void removeItemFromSpecificVendor() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Select name of the vendor you would like to remove from inventory: ");
-        String vendorNameFromuser = getVendorNameFromUser(scanner);
-        Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+        Vendor vendor = getValidVendor(scanner,"Select the vendor you would like to remove from inventory: ");
+        // System.out.print("Select name of the vendor you would like to remove from inventory: ");
+        // String vendorNameFromuser = getVendorNameFromUser(scanner);
+        // Vendor vendor = instance.getVendorByName(vendorNameFromuser);
 
         // immidiate return if vendor does not have any inventory
         if (vendor.inventory.isEmpty()) {
@@ -433,9 +437,7 @@ public class ServiceManager implements Serializable {
     // Menu Option 7 to get all items by category for specific vendor
     public void getItemsByCategoryFromVendor() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Select name of the vendor you would like to view: ");
-        String vendorNameFromuser = getVendorNameFromUser(scanner);
-        Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+        Vendor vendor = getValidVendor(scanner,"Select the vendor you would like to get items by category: ");
 
         // immidiate return if vendor does not have any inventory
         if (vendor.inventory.isEmpty()) {
@@ -447,7 +449,12 @@ public class ServiceManager implements Serializable {
         do {
             String categoryFromUser = getItemCategoryFromUser(scanner, vendor);
             List<Item> itemsByCategory = vendor.getByCategory(categoryFromUser);
+            
+            if (!itemsByCategory.isEmpty()){
             System.out.println(getAllItemDescription(itemsByCategory));
+        } else {
+            System.out.println(vendor.toString()+" does not have any item in "+categoryFromUser+" category");
+        }
 
             System.out.print("\nDo you want to lookup another category? (y/n): ");
             viewingItems = promptNextStep(scanner);
@@ -461,7 +468,7 @@ public class ServiceManager implements Serializable {
         boolean continueLookup = true;
 
         do {
-            Vendor vendor = getValidVendor(scanner);
+            Vendor vendor = getValidVendor(scanner,"Select the vendor you would like to view inventory: ");
 
             int itemID;
             do {

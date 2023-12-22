@@ -1,12 +1,12 @@
-Alez|Decor|987|5.0|Decor|312|2.5|Decor|224|4.0
-Kaching|Decor|786|3.3|Clothing|415|2.9|Electronics|584|1.5
-Yoshi|Electronics|9|4.2|Electronics|635|4.5|Electronics|836|3.0
+Alez|Decor|224|4.0
+Kaching|Decor|786|3.3|Electronics|584|1.5
+Yoshi|Electronics|635|4.5|Electronics|836|3.0
 Kesha|Clothing|11|4.0|Electronics|12|3.8
-Vendor5|Electronics|13|4.5|Decor|14|3.2|Clothing|15|2.0
-Diego|Clothing|667|2.0|Decor|865|3.0|Decor|448|5.0|Clothing|351|2.5
-Mia|Decor|484|2.5|Clothing|117|3.5|Decor|408|3.0
+Green Lantern|Electronics|13|4.5|Decor|14|3.2|Clothing|15|2.0
+Diego|
+Mia|Clothing|117|3.5|Decor|408|3.0
 Cheddar|Electronics|259|3.0|Electronics|644|2.5
 Alexa|
-Barbie|Clothing|188|2.0|Electronics|835|4.5
+Barbie|Clothing|188|2.0|Electronics|835|4.5|Decor|355|3.5
 BigJames|Decor|961|1.5
 Khang|Electronics|116|4.5|Electronics|532|5.0
