@@ -47,15 +47,9 @@ public class MenuManager {
                 serviceManager.itemLookUpFromVendor();
                     break;
                 case 9:
-                    System.out.println("9");
+                    serviceManager.swapItemsBetweenVendors();
                     break;
                 case 10:
-                    System.out.println("10");
-                    break;
-                case 11:
-                    System.out.println("11");
-                    break;
-                case 12:
                     showMenu = false;
                     break;
 
@@ -64,7 +58,7 @@ public class MenuManager {
             // Consume newline character
             scanner.nextLine();
 
-            if (userInput < 12) {
+            if (userInput < 10) {
                 System.out.println("\nPress Enter to continue...");
                 scanner.nextLine();// Wait for user to press Enter
             }
@@ -86,20 +80,18 @@ public class MenuManager {
         System.out.println("6. Remove an item from the vendor's inventory");
         System.out.println("7. Get all items by category for a specific vendor");
         System.out.println("8. Check item availability in vendor inventory");
-        System.out.println("9. Get the best item by category for a vendor");
-        System.out.println("10. Swap specific items between vendors");
-        System.out.println("11. Swap the best items between vendors");
-        System.out.println("12. Exit");
+        System.out.println("9. Swap specific items between vendors");
+        System.out.println("10. Exit");
         System.out.println("➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤➤");
     }
 
     public static int getUserChoice(Scanner scanner) {
-        System.out.print("Enter the menu option you would like to select(1-12): ");
+        System.out.print("Enter the menu option you would like to select(1-10): ");
 
         while (!scanner.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a menu option between 1 to 12.");
+            System.out.println("Invalid input. Please enter a menu option between 1 to 10.");
             scanner.next();
-            System.out.print("Enter the menu option you would like to select (1-12): ");
+            System.out.print("Enter the menu option you would like to select (1-10): ");
         }
         return scanner.nextInt();
     }

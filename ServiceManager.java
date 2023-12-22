@@ -97,7 +97,7 @@ public class ServiceManager implements Serializable {
     }
 
     public void removeItemfromVendor(Vendor vendor, Scanner scanner) {
-        Item removedItem = promptUserForValidItemId(vendor, scanner);
+        Item removedItem = promptUserForValidItemId(vendor, scanner, "Enter the itemID of the item you would like to remove: ");
         int removedItemId = removedItem.getItemID();
         vendor.remove(removedItem);
         System.out
@@ -167,24 +167,6 @@ public class ServiceManager implements Serializable {
     }
 
     public static int getItemIDFromUser(Scanner scanner) {
-        // System.out.println("Enter the itemID of the item you would like to remove:
-        // ");
-
-        // while (true) {
-
-        //     if (scanner.hasNextInt()) {
-        //         int userInputItemID = scanner.nextInt();
-
-        //         if (userInputItemID != -1) {
-        //             return userInputItemID;
-        //         } else {
-        //             System.out.print("\nInvalid input. ItemID cannot be empty. Please enter ItemID again: ");
-        //         }
-        //     } else {
-        //         System.out.print("\nInvalid input: ItemID must be an integer. Please enter ItemID again: ");
-        //         scanner.next();
-        //     }
-        // }
         while (true) {
             String userInput = scanner.nextLine().trim();
     
@@ -234,14 +216,15 @@ public class ServiceManager implements Serializable {
         }
     }
 
-    public Item promptUserForValidItemId(Vendor vendor, Scanner scanner) {
-        System.out.print("Enter the itemID of the item you would like to remove: ");
+    public Item promptUserForValidItemId(Vendor vendor, Scanner scanner, String prompt) {
+        System.out.print(prompt);
         // int itemID = getItemIDFromUser(scanner);
         boolean itemDatabaseCheck = false;
         int itemID;
         do {
             itemID = getItemIDFromUser(scanner);
 
+            // if(getItemByItemID(vendor,itemID)!=null){
             if (!checkExistingItem(vendor, itemID)) {
                 System.out.print("Item does not exist in " + vendor.toString()
                         + "\'s inventory. Please provide a valid ItemID: ");
@@ -492,4 +475,26 @@ public class ServiceManager implements Serializable {
 
         System.out.print("Search complete. Directing to Main Menu.");
     }
+
+    //Menu Option 9 to swap items between 2 vendors
+    public void swapItemsBetweenVendors(){
+        Scanner scanner = new Scanner(System.in);
+        Vendor vendor1 = getValidVendor(scanner,"Select the first vendor you would like to trade: ");
+        System.out.print(vendor1.getVendorWithInventory());
+        Item itemFromVendor1 = promptUserForValidItemId(vendor1, scanner,"Enter the itemID of the item "+vendor1.toString()+" would like to trade: ");
+
+        Vendor vendor2 = getValidVendor(scanner,"Select the second vendor you would like to trade: ");
+        System.out.print(vendor2.getVendorWithInventory());
+        Item itemFromVendor2 = promptUserForValidItemId(vendor2, scanner,"Enter the itemID of the item "+vendor2.toString()+" would like to trade: ");
+
+        vendor1.swapItems(vendor2, itemFromVendor1, itemFromVendor2);
+        FileManager.saveDataFile(this.vendors);
+
+        System.out.print("\nItems have been successfully swapped!\n");
+
+        System.out.print("\nUpdated inventory listing: "+vendor1.getVendorWithInventory()+vendor1.getVendorWithInventory());
+        
+;        }
+
+
 }
