@@ -9,3 +9,4 @@ Cheddar|Electronics|259|3.0|Electronics|644|2.5
 Alexa|
 Barbie|Clothing|188|2.0|Electronics|835|4.5
 BigJames|Decor|961|1.5
+Khang|Electronics|116|4.5|Electronics|532|5.0

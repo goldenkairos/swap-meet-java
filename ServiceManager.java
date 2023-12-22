@@ -36,6 +36,7 @@ public class ServiceManager implements Serializable {
     }
 
     public Vendor getVendorByName(String name) {
+
         for (Vendor vendor : vendors) {
             if (vendor.toString().toLowerCase().equals(name.toLowerCase())) {
                 return vendor;
@@ -52,6 +53,21 @@ public class ServiceManager implements Serializable {
         } else {
             return false;
         }
+    }
+
+    public Vendor getValidVendor(Scanner scanner) {
+        Vendor vendor = null;
+        while (vendor == null) {
+            System.out.print("Select name of the vendor: ");
+            String vendorNameFromUser = getVendorNameFromUser(scanner);
+    
+            if (checkExistingVendor(vendorNameFromUser)) {
+                vendor = instance.getVendorByName(vendorNameFromUser);
+            } else {
+                System.out.println("This vendor does not exist in our database. Try again!\n");
+            }
+        }
+        return vendor;
     }
 
     public String promptUserForNewName(Scanner scanner) {
@@ -419,23 +435,53 @@ public class ServiceManager implements Serializable {
 
     }
 
-    // Menu Option 8 to check availability of an item in vendor inventory
+    // // Menu Option 8 to check availability of an item in vendor inventory
+    // public void itemLookUpFromVendor() {
+    //     Scanner scanner = new Scanner(System.in);
+    //     System.out.print("Select name of the vendor you would like to view: ");
+    //     String vendorNameFromuser = getVendorNameFromUser(scanner);
+    //     Vendor vendor = instance.getVendorByName(vendorNameFromuser);
+
+    //     boolean continueLookup = true;
+    //     do {
+    //         System.out.print("Enter the itemID of the item you would like to lookup: ");
+    //         itemIDLookup(vendor, scanner);            
+
+    //         scanner.nextLine();
+    //         System.out.print("\nDo you want to lookup another item? (y/n): ");
+    //         continueLookup = promptNextStep(scanner);
+    //     } while (continueLookup);
+
+    //     System.out.print("Search complete. Directing to Main Menu.");
+    // }
+
     public void itemLookUpFromVendor() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Select name of the vendor you would like to view: ");
-        String vendorNameFromuser = getVendorNameFromUser(scanner);
-        Vendor vendor = instance.getVendorByName(vendorNameFromuser);
-
         boolean continueLookup = true;
-        do {
-            System.out.print("Enter the itemID of the item you would like to lookup: ");
-            itemIDLookup(vendor, scanner);            
 
-            scanner.nextLine();
-            System.out.print("\nDo you want to lookup another item? (y/n): ");
+        do {
+            Vendor vendor = getValidVendor(scanner);
+    
+            int itemID;
+            do {
+                System.out.print("Enter the itemID of the item you would like to lookup: ");
+                itemID = getItemIDFromUser(scanner);
+    
+                if (!checkExistingItem(vendor, itemID)) {
+                    System.out.println("Item does not exist in " + vendor.toString()
+                            + "\'s inventory.");
+                } else {
+                    System.out.println("\nItemID " + itemID + " is found in " + vendor.toString()
+                            + "\'s inventory!\n");
+                }
+                scanner.nextLine();
+                System.out.print("\nDo you want to lookup another item? (y/n): ");
+            } while (promptNextStep(scanner));
+            
+            System.out.print("\nDo you want to lookup items for another vendor? (y/n): ");
             continueLookup = promptNextStep(scanner);
         } while (continueLookup);
-
+    
         System.out.print("Search complete. Directing to Main Menu.");
     }
 }
