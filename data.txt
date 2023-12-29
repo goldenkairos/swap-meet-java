@@ -7,7 +7,7 @@ Diego|
 Mia|Electronics|259|3.0|Electronics|635|4.5
 Cheddar|Electronics|644|2.5|Decor|408|3.0
 Alexa|Decor|148|3.5|Decor|193|5.0
-Barbie|Decor|355|3.5|Electronics|116|4.5|Electronics|835|4.5
+Barbie|Electronics|116|4.5|Electronics|835|4.5|Decor|134|4.5
 BigJames|Clothing|11|4.0
 Khang|Electronics|532|5.0|Clothing|188|2.0
-Rianna|Decor|134|4.5
+Rianna|Decor|355|3.5
