@@ -28,8 +28,8 @@ git clone https://github.com/your-username/TradeMaster.git
 ```
 
 3. Compile and run the application:
-```javac TradeMaster.java
-java TradeMaster```
+```javac TradeMaster.java```
+```java TradeMaster```
 
 ### Usage
 Follow the on-screen menu prompts to perform actions such as adding vendors, managing inventory, and swapping items between vendors.
